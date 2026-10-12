@@ -9,13 +9,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="favicon-512.png">
-<link rel="apple-touch-icon" href="favicon-512.png">
-<link rel="stylesheet" href="css/styles.css">Custom Master Bath Floor
+<link rel="icon" href="favicon-small.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="css/styles.css">
 <style>
   .masonry-gallery .gallery-caption em { min-height: 1lh; }
 </style>
+<link rel="canonical" href="https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Legacy TileWorks &amp; Design">
+<meta property="og:title" content="Tile Project Gallery | Legacy TileWorks">
+<meta property="og:description" content="View custom shower, flooring, backsplash, stone, fireplace, and custom design projects.">
+<meta property="og:url" content="https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/projects.html">
+<meta property="og:image" content="https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/assets/images/social-share.jpg">
+<meta property="og:image:alt" content="Light bathroom with a glass-enclosed mosaic tile shower">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/projects.html#webpage", "url": "https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/projects.html", "name": "Tile Project Gallery | Legacy TileWorks", "description": "View custom shower, flooring, backsplash, stone, fireplace, and custom design projects.", "about": {"@id": "https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/#business"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/"}, {"@type": "ListItem", "position": 2, "name": "Tile Project Gallery", "item": "https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/projects.html"}]}]}</script>
 </head>
 <body>
 
@@ -36,12 +48,12 @@
 <header class="site-header">
   <div class="container navbar">
     <a class="logo-wrap" href="index.html" aria-label="Legacy TileWorks and Design home">
-      <img src="assets/images/logo-transparent.png" width="1586" height="840" alt="Legacy TileWorks and Design">
+      <img src="assets/images/logo-cropped.webp" width="750" height="389" alt="Legacy TileWorks and Design">
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">☰</button>
-    <nav class="nav" aria-label="Primary navigation">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation" aria-controls="primary-navigation">☰</button>
+    <nav id="primary-navigation" class="nav" aria-label="Primary navigation">
       <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html" aria-current="page">Projects</a>
-      <!--<a href="reviews.html">Reviews</a>-->
+      <a href="reviews.html">Reviews</a>
       <a href="about.html">About</a><a href="contact.html">Contact</a>
       <a class="nav-cta" href="contact.html#estimate">Request an Estimate</a>
     </nav>
@@ -54,14 +66,14 @@
 <section class="section">
   <div class="container">
 
-    <div class="gallery-filters" aria-label="Filter projects">
-      <button class="filter-btn active" data-filter="all">All Work</button>
-      <button class="filter-btn" data-filter="showers">Showers</button>
-      <button class="filter-btn" data-filter="bathrooms">Bathrooms</button>
-      <button class="filter-btn" data-filter="backsplashes">Backsplashes</button>
-      <button class="filter-btn" data-filter="flooring">Flooring</button>
-      <button class="filter-btn" data-filter="fireplaces">Fireplaces</button>
-      <button class="filter-btn" data-filter="custom">Custom Work</button>
+    <div id="gallery" class="gallery-filters" role="group" aria-label="Filter projects">
+      <button class="filter-btn active" data-filter="all" aria-pressed="true">All Work</button>
+      <button class="filter-btn" data-filter="showers" aria-pressed="false">Showers</button>
+      <button class="filter-btn" data-filter="bathrooms" aria-pressed="false">Bathrooms</button>
+      <button class="filter-btn" data-filter="backsplashes" aria-pressed="false">Backsplashes</button>
+      <button class="filter-btn" data-filter="flooring" aria-pressed="false">Flooring</button>
+      <button class="filter-btn" data-filter="fireplaces" aria-pressed="false">Fireplaces</button>
+      <button class="filter-btn" data-filter="custom" aria-pressed="false">Custom Work</button>
     </div>
 
     <!-- Add descriptions individually by filling each image's empty <em> element. -->
@@ -70,10 +82,10 @@
       <!-- BACKSPLASHES -->
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/backsplash-3.jpg"
+        <button class="gallery-open" type="button" aria-label="View Glass Bar Backsplash"
+          data-full="assets/images/optimized/portfolio/backsplash-3-full.webp"
           data-title="Glass Bar Backsplash">
-          <img src="assets/images/portfolio/backsplash-3.jpg" width="1200" height="1800" alt="Glass Bar Backsplash" loading="lazy">
+          <img src="assets/images/portfolio/backsplash-3.jpg" alt="Glass Bar Backsplash" width="1200" height="1800" srcset="assets/images/optimized/portfolio/backsplash-3-480.webp 480w, assets/images/optimized/portfolio/backsplash-3-960.webp 960w, assets/images/optimized/portfolio/backsplash-3-1200.webp 1200w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Glass Bar Backsplash</strong>
@@ -83,10 +95,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/backsplash-4.jpg"
+        <button class="gallery-open" type="button" aria-label="View Glass &amp; Stainless Kitchen Backsplash"
+          data-full="assets/images/optimized/portfolio/backsplash-4-full.webp"
           data-title="Glass &amp; Stainless Kitchen Backsplash">
-          <img src="assets/images/portfolio/backsplash-4.jpg" width="1800" height="1201" alt="Glass &amp; Stainless Kitchen Backsplash" loading="lazy">
+          <img src="assets/images/portfolio/backsplash-4.jpg" alt="Glass &amp; Stainless Kitchen Backsplash" width="1800" height="1201" srcset="assets/images/optimized/portfolio/backsplash-4-480.webp 480w, assets/images/optimized/portfolio/backsplash-4-960.webp 960w, assets/images/optimized/portfolio/backsplash-4-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Glass &amp; Stainless Kitchen Backsplash</strong>
@@ -96,10 +108,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/backsplash-5.jpg"
+        <button class="gallery-open" type="button" aria-label="View Simple Subway Backsplash"
+          data-full="assets/images/optimized/portfolio/backsplash-5-full.webp"
           data-title="Simple Subway Backsplash">
-          <img src="assets/images/portfolio/backsplash-5.jpg" width="1800" height="1201" alt="Simple Subway Backsplash" loading="lazy">
+          <img src="assets/images/portfolio/backsplash-5.jpg" alt="Simple Subway Backsplash" width="1800" height="1201" srcset="assets/images/optimized/portfolio/backsplash-5-480.webp 480w, assets/images/optimized/portfolio/backsplash-5-960.webp 960w, assets/images/optimized/portfolio/backsplash-5-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Simple Subway Backsplash</strong>
@@ -109,10 +121,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/backsplash-6.jpg"
+        <button class="gallery-open" type="button" aria-label="View Glass Backsplash with Custom Inset"
+          data-full="assets/images/optimized/portfolio/backsplash-6-full.webp"
           data-title="Glass Backsplash with Custom Inset">
-          <img src="assets/images/portfolio/backsplash-6.jpg" width="1800" height="1018" alt="Glass Backsplash with Custom Inset" loading="lazy">
+          <img src="assets/images/portfolio/backsplash-6.jpg" alt="Glass Backsplash with Custom Inset" width="1800" height="1018" srcset="assets/images/optimized/portfolio/backsplash-6-480.webp 480w, assets/images/optimized/portfolio/backsplash-6-960.webp 960w, assets/images/optimized/portfolio/backsplash-6-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Glass Backsplash with Custom Inset</strong>
@@ -122,10 +134,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/backsplash-7.jpg"
+        <button class="gallery-open" type="button" aria-label="View Marble Backsplash with Herringbone Accent"
+          data-full="assets/images/optimized/portfolio/backsplash-7-full.webp"
           data-title="Marble Backsplash with Herringbone Accent">
-          <img src="assets/images/portfolio/backsplash-7.jpg" width="1800" height="1018" alt="Marble Backsplash with Herringbone Accent" loading="lazy">
+          <img src="assets/images/portfolio/backsplash-7.jpg" alt="Marble Backsplash with Herringbone Accent" width="1800" height="1018" srcset="assets/images/optimized/portfolio/backsplash-7-480.webp 480w, assets/images/optimized/portfolio/backsplash-7-960.webp 960w, assets/images/optimized/portfolio/backsplash-7-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Marble Backsplash with Herringbone Accent</strong>
@@ -135,10 +147,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Geometrical Web Bar Backsplash &amp; Counter"
           data-full="assets/images/portfolio/backsplash-10.jpg"
           data-title="Geometrical Web Bar Backsplash &amp; Counter">
-          <img src="assets/images/portfolio/backsplash-10.jpg" width="4000" height="3000" alt="Geometrical Web Bar Backsplash &amp; Counter" loading="lazy">
+          <img src="assets/images/portfolio/backsplash-10.jpg" alt="Geometrical Web Bar Backsplash &amp; Counter" width="4000" height="3000" srcset="assets/images/optimized/portfolio/backsplash-10-480.webp 480w, assets/images/optimized/portfolio/backsplash-10-960.webp 960w, assets/images/optimized/portfolio/backsplash-10-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Geometrical Web Bar Backsplash &amp; Counter</strong>
@@ -148,10 +160,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Simple Bathroom Countertop &amp; Mosaic Backsplash"
           data-full="assets/images/portfolio/backsplash-11.jpg"
           data-title="Simple Bathroom Countertop &amp; Mosaic Backsplash">
-          <img src="assets/images/portfolio/backsplash-11.jpg" width="4000" height="3000" alt="Simple Bathroom Countertop &amp; Mosaic Backsplash" loading="lazy">
+          <img src="assets/images/portfolio/backsplash-11.jpg" alt="Simple Bathroom Countertop &amp; Mosaic Backsplash" width="4000" height="3000" srcset="assets/images/optimized/portfolio/backsplash-11-480.webp 480w, assets/images/optimized/portfolio/backsplash-11-960.webp 960w, assets/images/optimized/portfolio/backsplash-11-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Simple Bathroom Countertop &amp; Mosaic Backsplash</strong>
@@ -161,10 +173,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Bathroom Sink &amp; Backsplash"
           data-full="assets/images/portfolio/sink-and-backsplace-1.jpg"
           data-title="Bathroom Sink &amp; Backsplash">
-          <img src="assets/images/portfolio/sink-and-backsplace-1.jpg" width="4000" height="3000" alt="Bathroom Sink &amp; Backsplash" loading="lazy">
+          <img src="assets/images/portfolio/sink-and-backsplace-1.jpg" alt="Bathroom Sink &amp; Backsplash" width="4000" height="3000" srcset="assets/images/optimized/portfolio/sink-and-backsplace-1-480.webp 480w, assets/images/optimized/portfolio/sink-and-backsplace-1-960.webp 960w, assets/images/optimized/portfolio/sink-and-backsplace-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Bathroom Sink &amp; Backsplash</strong>
@@ -176,10 +188,10 @@
       <!-- SHOWERS -->
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/shower-4.jpg"
+        <button class="gallery-open" type="button" aria-label="View Subway Shower with Pebble Accent"
+          data-full="assets/images/optimized/portfolio/shower-4-full.webp"
           data-title="Subway Shower with Pebble Accent">
-          <img src="assets/images/portfolio/shower-4.jpg" width="1080" height="1080" alt="Subway Shower with Pebble Accent" loading="lazy">
+          <img src="assets/images/portfolio/shower-4.jpg" alt="Subway Shower with Pebble Accent" width="1080" height="1080" srcset="assets/images/optimized/portfolio/shower-4-480.webp 480w, assets/images/optimized/portfolio/shower-4-960.webp 960w, assets/images/optimized/portfolio/shower-4-1080.webp 1080w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Subway Shower with Pebble Accent</strong>
@@ -189,10 +201,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/shower-5.jpg"
+        <button class="gallery-open" type="button" aria-label="View White Marble Shower and Bathroom"
+          data-full="assets/images/optimized/portfolio/shower-5-full.webp"
           data-title="White Marble Shower and Bathroom">
-          <img src="assets/images/portfolio/shower-5.jpg" width="768" height="768" alt="White Marble Shower and Bathroom" loading="lazy">
+          <img src="assets/images/portfolio/shower-5.jpg" alt="White Marble Shower and Bathroom" width="768" height="768" srcset="assets/images/optimized/portfolio/shower-5-480.webp 480w, assets/images/optimized/portfolio/shower-5-768.webp 768w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>White Marble Shower and Bathroom</strong>
@@ -202,10 +214,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Patterned Shower with Mosaic Ceiling"
           data-full="assets/images/portfolio/shower-6.jpg"
           data-title="Patterned Shower with Mosaic Ceiling">
-          <img src="assets/images/portfolio/shower-6.jpg" width="1536" height="2048" alt="Patterned Shower with Mosaic Ceiling" loading="lazy">
+          <img src="assets/images/portfolio/shower-6.jpg" alt="Patterned Shower with Mosaic Ceiling" width="1536" height="2048" srcset="assets/images/optimized/portfolio/shower-6-480.webp 480w, assets/images/optimized/portfolio/shower-6-960.webp 960w, assets/images/optimized/portfolio/shower-6-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Patterned Shower with Mosaic Ceiling</strong>
@@ -215,10 +227,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Diagonal Shower Black Niche"
           data-full="assets/images/portfolio/shower-9-2.jpg"
           data-title="Diagonal Shower Black Niche">
-          <img src="assets/images/portfolio/shower-9-2.jpg" width="2048" height="899" alt="Diagonal Shower Black Niche" loading="lazy">
+          <img src="assets/images/portfolio/shower-9-2.jpg" alt="Diagonal Shower Black Niche" width="2048" height="899" srcset="assets/images/optimized/portfolio/shower-9-2-480.webp 480w, assets/images/optimized/portfolio/shower-9-2-960.webp 960w, assets/images/optimized/portfolio/shower-9-2-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Diagonal Shower Black Niche</strong>
@@ -228,10 +240,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Light Shower with Geometric Floor"
           data-full="assets/images/portfolio/shower-10.jpg"
           data-title="Light Shower with Geometric Floor">
-          <img src="assets/images/portfolio/shower-10.jpg" width="1536" height="2048" alt="Light Shower with Geometric Floor" loading="lazy">
+          <img src="assets/images/portfolio/shower-10.jpg" alt="Light Shower with Geometric Floor" width="1536" height="2048" srcset="assets/images/optimized/portfolio/shower-10-480.webp 480w, assets/images/optimized/portfolio/shower-10-960.webp 960w, assets/images/optimized/portfolio/shower-10-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Light Shower with Geometric Floor</strong>
@@ -241,10 +253,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Beige Shower with Linear Mosaic Band"
           data-full="assets/images/portfolio/shower-11.jpg"
           data-title="Beige Shower with Linear Mosaic Band">
-          <img src="assets/images/portfolio/shower-11.jpg" width="3000" height="4000" alt="Beige Shower with Linear Mosaic Band" loading="lazy">
+          <img src="assets/images/portfolio/shower-11.jpg" alt="Beige Shower with Linear Mosaic Band" width="3000" height="4000" srcset="assets/images/optimized/portfolio/shower-11-480.webp 480w, assets/images/optimized/portfolio/shower-11-960.webp 960w, assets/images/optimized/portfolio/shower-11-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Beige Shower with Linear Mosaic Band</strong>
@@ -254,10 +266,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Basketweave Shower Floor"
           data-full="assets/images/portfolio/shower-pan-1.jpg"
           data-title="Basketweave Shower Floor">
-          <img src="assets/images/portfolio/shower-pan-1.jpg" width="4000" height="3000" alt="Basketweave Shower Floor" loading="lazy">
+          <img src="assets/images/portfolio/shower-pan-1.jpg" alt="Basketweave Shower Floor" width="4000" height="3000" srcset="assets/images/optimized/portfolio/shower-pan-1-480.webp 480w, assets/images/optimized/portfolio/shower-pan-1-960.webp 960w, assets/images/optimized/portfolio/shower-pan-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Basketweave Shower Floor</strong>
@@ -267,10 +279,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Dark Diagonal Shower Floor"
           data-full="assets/images/portfolio/custom-shower-pan-1.jpg"
           data-title="Dark Diagonal Shower Floor">
-          <img src="assets/images/portfolio/custom-shower-pan-1.jpg" width="2048" height="899" alt="Dark Diagonal Shower Floor" loading="lazy">
+          <img src="assets/images/portfolio/custom-shower-pan-1.jpg" alt="Dark Diagonal Shower Floor" width="2048" height="899" srcset="assets/images/optimized/portfolio/custom-shower-pan-1-480.webp 480w, assets/images/optimized/portfolio/custom-shower-pan-1-960.webp 960w, assets/images/optimized/portfolio/custom-shower-pan-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Dark Diagonal Shower Floor</strong>
@@ -280,10 +292,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Marble Shower with Brown Accent Bands"
           data-full="assets/images/portfolio/master-shower-1.jpg"
           data-title="Marble Shower with Brown Accent Bands">
-          <img src="assets/images/portfolio/master-shower-1.jpg" width="3000" height="4000" alt="Marble Shower with Brown Accent Bands" loading="lazy">
+          <img src="assets/images/portfolio/master-shower-1.jpg" alt="Marble Shower with Brown Accent Bands" width="3000" height="4000" srcset="assets/images/optimized/portfolio/master-shower-1-480.webp 480w, assets/images/optimized/portfolio/master-shower-1-960.webp 960w, assets/images/optimized/portfolio/master-shower-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Marble Shower with Brown Accent Bands</strong>
@@ -295,10 +307,10 @@
       <!-- BATHROOMS -->
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/bathroom-1.jpg"
+        <button class="gallery-open" type="button" aria-label="View Diagonal Tub Surround with Mosaic Band"
+          data-full="assets/images/optimized/portfolio/bathroom-1-full.webp"
           data-title="Diagonal Tub Surround with Mosaic Band">
-          <img src="assets/images/portfolio/bathroom-1.jpg" width="986" height="1800" alt="Diagonal Tub Surround with Mosaic Band" loading="lazy">
+          <img src="assets/images/portfolio/bathroom-1.jpg" alt="Diagonal Tub Surround with Mosaic Band" width="986" height="1800" srcset="assets/images/optimized/portfolio/bathroom-1-480.webp 480w, assets/images/optimized/portfolio/bathroom-1-960.webp 960w, assets/images/optimized/portfolio/bathroom-1-986.webp 986w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Diagonal Tub Surround with Mosaic Band</strong>
@@ -308,10 +320,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/bathroom-2.jpg"
+        <button class="gallery-open" type="button" aria-label="View Fishscale Bathroom"
+          data-full="assets/images/optimized/portfolio/bathroom-2-full.webp"
           data-title="Fishscale Bathroom">
-          <img src="assets/images/portfolio/bathroom-2.jpg" width="790" height="1800" alt="Fishscale Bathroom" loading="lazy">
+          <img src="assets/images/portfolio/bathroom-2.jpg" alt="Fishscale Bathroom" width="790" height="1800" srcset="assets/images/optimized/portfolio/bathroom-2-480.webp 480w, assets/images/optimized/portfolio/bathroom-2-790.webp 790w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Fishscale Bathroom</strong>
@@ -321,10 +333,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Custom Shower Bathroom"
           data-full="assets/images/portfolio/bathroom-3.jpg"
           data-title="Custom Shower Bathroom">
-          <img src="assets/images/portfolio/bathroom-3.jpg" width="3000" height="4000" alt="Custom Shower Bathroom" loading="lazy">
+          <img src="assets/images/portfolio/bathroom-3.jpg" alt="Custom Shower Bathroom" width="3000" height="4000" srcset="assets/images/optimized/portfolio/bathroom-3-480.webp 480w, assets/images/optimized/portfolio/bathroom-3-960.webp 960w, assets/images/optimized/portfolio/bathroom-3-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Custom Shower Bathroom</strong>
@@ -334,10 +346,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Custom Master Bath Tub Surround"
           data-full="assets/images/portfolio/bathroom-4.jpg"
           data-title="Custom Master Bath Tub Surround">
-          <img src="assets/images/portfolio/bathroom-4.jpg" width="4000" height="3000" alt="Custom Master Bath Tub Surround" loading="lazy">
+          <img src="assets/images/portfolio/bathroom-4.jpg" alt="Custom Master Bath Tub Surround" width="4000" height="3000" srcset="assets/images/optimized/portfolio/bathroom-4-480.webp 480w, assets/images/optimized/portfolio/bathroom-4-960.webp 960w, assets/images/optimized/portfolio/bathroom-4-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Custom Master Bath Tub Surround</strong>
@@ -347,10 +359,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Custom Master Bath Floor"
           data-full="assets/images/portfolio/bathroom-floor-4.jpg"
           data-title="Custom Master Bath Floor">
-          <img src="assets/images/portfolio/bathroom-floor-4.jpg" width="3000" height="4000" alt="Custom Master Bath Floor" loading="lazy">
+          <img src="assets/images/portfolio/bathroom-floor-4.jpg" alt="Custom Master Bath Floor" width="3000" height="4000" srcset="assets/images/optimized/portfolio/bathroom-floor-4-480.webp 480w, assets/images/optimized/portfolio/bathroom-floor-4-960.webp 960w, assets/images/optimized/portfolio/bathroom-floor-4-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Custom Master Bath Floor</strong>
@@ -360,10 +372,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Marble Vanity Backsplash"
           data-full="assets/images/portfolio/vanity-sinks-1.jpg"
           data-title="Marble Vanity Backsplash">
-          <img src="assets/images/portfolio/vanity-sinks-1.jpg" width="1536" height="2048" alt="Marble Vanity Backsplash" loading="lazy">
+          <img src="assets/images/portfolio/vanity-sinks-1.jpg" alt="Marble Vanity Backsplash" width="1536" height="2048" srcset="assets/images/optimized/portfolio/vanity-sinks-1-480.webp 480w, assets/images/optimized/portfolio/vanity-sinks-1-960.webp 960w, assets/images/optimized/portfolio/vanity-sinks-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Marble Vanity Backsplash</strong>
@@ -375,10 +387,10 @@
       <!-- FLOORING -->
 
       <article class="masonry-item" data-project="flooring">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/floor-1.jpg"
+        <button class="gallery-open" type="button" aria-label="View Single Herringbone Square Floor"
+          data-full="assets/images/optimized/portfolio/floor-1-full.webp"
           data-title="Single Herringbone Square Floor">
-          <img src="assets/images/portfolio/floor-1.jpg" width="1800" height="1201" alt="Single Herringbone Square Floor" loading="lazy">
+          <img src="assets/images/portfolio/floor-1.jpg" alt="Single Herringbone Square Floor" width="1800" height="1201" srcset="assets/images/optimized/portfolio/floor-1-480.webp 480w, assets/images/optimized/portfolio/floor-1-960.webp 960w, assets/images/optimized/portfolio/floor-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Flooring</small>
             <strong>Single Herringbone Square Floor</strong>
@@ -388,10 +400,10 @@
       </article>
 
       <article class="masonry-item" data-project="flooring">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/floor-2.jpg"
+        <button class="gallery-open" type="button" aria-label="View Herringbone with Border"
+          data-full="assets/images/optimized/portfolio/floor-2-full.webp"
           data-title="Herringbone with Border">
-          <img src="assets/images/portfolio/floor-2.jpg" width="1800" height="1018" alt="Herringbone with Border" loading="lazy">
+          <img src="assets/images/portfolio/floor-2.jpg" alt="Herringbone with Border" width="1800" height="1018" srcset="assets/images/optimized/portfolio/floor-2-480.webp 480w, assets/images/optimized/portfolio/floor-2-960.webp 960w, assets/images/optimized/portfolio/floor-2-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Flooring</small>
             <strong>Herringbone with Border</strong>
@@ -401,10 +413,10 @@
       </article>
 
       <article class="masonry-item" data-project="flooring">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Pinwheel with 2&quot; Accent"
           data-full="assets/images/portfolio/kitchen-floor-1.jpg"
           data-title="Pinwheel with 2&quot; Accent">
-          <img src="assets/images/portfolio/kitchen-floor-1.jpg" width="2048" height="1536" alt="Pinwheel with 2&quot; Accent" loading="lazy">
+          <img src="assets/images/portfolio/kitchen-floor-1.jpg" alt="Pinwheel with 2&quot; Accent" width="2048" height="1536" srcset="assets/images/optimized/portfolio/kitchen-floor-1-480.webp 480w, assets/images/optimized/portfolio/kitchen-floor-1-960.webp 960w, assets/images/optimized/portfolio/kitchen-floor-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Flooring</small>
             <strong>Pinwheel with 2&quot; Accent</strong>
@@ -414,10 +426,10 @@
       </article>
 
       <article class="masonry-item" data-project="flooring">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/basketweave.jpg"
+        <button class="gallery-open" type="button" aria-label="View Basketweave Den"
+          data-full="assets/images/optimized/portfolio/basketweave-full.webp"
           data-title="Basketweave Den">
-          <img src="assets/images/portfolio/basketweave.jpg" width="1800" height="1201" alt="Basketweave Den" loading="lazy">
+          <img src="assets/images/portfolio/basketweave.jpg" alt="Basketweave Den" width="1800" height="1201" srcset="assets/images/optimized/portfolio/basketweave-480.webp 480w, assets/images/optimized/portfolio/basketweave-960.webp 960w, assets/images/optimized/portfolio/basketweave-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Flooring</small>
             <strong>Basketweave Den</strong>
@@ -427,10 +439,10 @@
       </article>
 
       <article class="masonry-item" data-project="flooring">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Dutchman Transition"
           data-full="assets/images/portfolio/transition-1.jpg"
           data-title="Dutchman Transition">
-          <img src="assets/images/portfolio/transition-1.jpg" width="4000" height="3000" alt="Dutchman Transition" loading="lazy">
+          <img src="assets/images/portfolio/transition-1.jpg" alt="Dutchman Transition" width="4000" height="3000" srcset="assets/images/optimized/portfolio/transition-1-480.webp 480w, assets/images/optimized/portfolio/transition-1-960.webp 960w, assets/images/optimized/portfolio/transition-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Flooring</small>
             <strong>Dutchman Transition</strong>
@@ -442,10 +454,10 @@
       <!-- FIREPLACES -->
 
       <article class="masonry-item" data-project="fireplaces">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Dark Fireplace Feature Wall"
           data-full="assets/images/portfolio/fire-place-1.jpg"
           data-title="Dark Fireplace Feature Wall">
-          <img src="assets/images/portfolio/fire-place-1.jpg" width="899" height="2048" alt="Dark Fireplace Feature Wall" loading="lazy">
+          <img src="assets/images/portfolio/fire-place-1.jpg" alt="Dark Fireplace Feature Wall" width="899" height="2048" srcset="assets/images/optimized/portfolio/fire-place-1-480.webp 480w, assets/images/optimized/portfolio/fire-place-1-899.webp 899w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Fireplaces</small>
             <strong>Dark Fireplace Feature Wall</strong>
@@ -455,10 +467,10 @@
       </article>
 
       <article class="masonry-item" data-project="fireplaces">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Marble Fireplace Surround and Hearth"
           data-full="assets/images/portfolio/fireplace-01.jpg"
           data-title="Marble Fireplace Surround and Hearth">
-          <img src="assets/images/portfolio/fireplace-01.jpg" width="4000" height="3000" alt="Marble Fireplace Surround and Hearth" loading="lazy">
+          <img src="assets/images/portfolio/fireplace-01.jpg" alt="Marble Fireplace Surround and Hearth" width="4000" height="3000" srcset="assets/images/optimized/portfolio/fireplace-01-480.webp 480w, assets/images/optimized/portfolio/fireplace-01-960.webp 960w, assets/images/optimized/portfolio/fireplace-01-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Fireplaces</small>
             <strong>Marble Fireplace Surround and Hearth</strong>
@@ -470,10 +482,10 @@
       <!-- CUSTOM WORK -->
 
       <article class="masonry-item" data-project="custom">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/laundry-room-1.jpg"
+        <button class="gallery-open" type="button" aria-label="View Mosaic Laundry Room"
+          data-full="assets/images/optimized/portfolio/laundry-room-1-full.webp"
           data-title="Mosaic Laundry Room">
-          <img src="assets/images/portfolio/laundry-room-1.jpg" width="790" height="1800" alt="Mosaic Laundry Room" loading="lazy">
+          <img src="assets/images/portfolio/laundry-room-1.jpg" alt="Mosaic Laundry Room" width="790" height="1800" srcset="assets/images/optimized/portfolio/laundry-room-1-480.webp 480w, assets/images/optimized/portfolio/laundry-room-1-790.webp 790w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Custom Work</small>
             <strong>Mosaic Laundry Room</strong>
@@ -483,10 +495,10 @@
       </article>
 
       <article class="masonry-item" data-project="custom">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/pillars-1.jpg"
+        <button class="gallery-open" type="button" aria-label="View Architectural Columns"
+          data-full="assets/images/optimized/portfolio/pillars-1-full.webp"
           data-title="Architectural Columns">
-          <img src="assets/images/portfolio/pillars-1.jpg" width="790" height="1800" alt="Architectural Columns" loading="lazy">
+          <img src="assets/images/portfolio/pillars-1.jpg" alt="Architectural Columns" width="790" height="1800" srcset="assets/images/optimized/portfolio/pillars-1-480.webp 480w, assets/images/optimized/portfolio/pillars-1-790.webp 790w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Custom Work</small>
             <strong>Architectural Columns</strong>
@@ -499,10 +511,10 @@
       <!-- NEW PORTFOLIO ADDITIONS - AUGUST 2026 -->
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/black-white-mosaic-kitchen-1.jpg"
+        <button class="gallery-open" type="button" aria-label="View Black &amp; White Mosaic Kitchen"
+          data-full="assets/images/optimized/portfolio/new/black-white-mosaic-kitchen-1-full.webp"
           data-title="Black &amp; White Mosaic Kitchen">
-          <img src="assets/images/portfolio/new/black-white-mosaic-kitchen-1.jpg" width="2200" height="966" alt="Black &amp; White Mosaic Kitchen" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/black-white-mosaic-kitchen-1.jpg" alt="Black &amp; White Mosaic Kitchen" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/black-white-mosaic-kitchen-1-480.webp 480w, assets/images/optimized/portfolio/new/black-white-mosaic-kitchen-1-960.webp 960w, assets/images/optimized/portfolio/new/black-white-mosaic-kitchen-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Black &amp; White Mosaic Kitchen</strong>
@@ -512,10 +524,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/green-tile-powder-room.jpg"
+        <button class="gallery-open" type="button" aria-label="View Green Powder Room"
+          data-full="assets/images/optimized/portfolio/new/green-tile-powder-room-full.webp"
           data-title="Green Powder Room">
-          <img src="assets/images/portfolio/new/green-tile-powder-room.jpg" width="966" height="2200" alt="Green Powder Room" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/green-tile-powder-room.jpg" alt="Green Powder Room" width="966" height="2200" srcset="assets/images/optimized/portfolio/new/green-tile-powder-room-480.webp 480w, assets/images/optimized/portfolio/new/green-tile-powder-room-960.webp 960w, assets/images/optimized/portfolio/new/green-tile-powder-room-966.webp 966w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Green Powder Room</strong>
@@ -525,10 +537,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/marble-shower-floor-detail.jpg"
+        <button class="gallery-open" type="button" aria-label="View Marble Shower Mosaic Floor"
+          data-full="assets/images/optimized/portfolio/new/marble-shower-floor-detail-full.webp"
           data-title="Marble Shower Mosaic Floor">
-          <img src="assets/images/portfolio/new/marble-shower-floor-detail.jpg" width="2200" height="966" alt="Marble Shower Mosaic Floor" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/marble-shower-floor-detail.jpg" alt="Marble Shower Mosaic Floor" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/marble-shower-floor-detail-480.webp 480w, assets/images/optimized/portfolio/new/marble-shower-floor-detail-960.webp 960w, assets/images/optimized/portfolio/new/marble-shower-floor-detail-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Marble Shower Mosaic Floor</strong>
@@ -538,10 +550,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/large-format-bathroom.jpg"
+        <button class="gallery-open" type="button" aria-label="View Large-Format Bathroom"
+          data-full="assets/images/optimized/portfolio/new/large-format-bathroom-full.webp"
           data-title="Large-Format Bathroom">
-          <img src="assets/images/portfolio/new/large-format-bathroom.jpg" width="966" height="2200" alt="Large-Format Bathroom" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/large-format-bathroom.jpg" alt="Large-Format Bathroom" width="966" height="2200" srcset="assets/images/optimized/portfolio/new/large-format-bathroom-480.webp 480w, assets/images/optimized/portfolio/new/large-format-bathroom-960.webp 960w, assets/images/optimized/portfolio/new/large-format-bathroom-966.webp 966w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Large-Format Bathroom</strong>
@@ -551,10 +563,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/marble-shower-niche.jpg"
+        <button class="gallery-open" type="button" aria-label="View Marble Shower Niche"
+          data-full="assets/images/optimized/portfolio/new/marble-shower-niche-full.webp"
           data-title="Marble Shower Niche">
-          <img src="assets/images/portfolio/new/marble-shower-niche.jpg" width="2200" height="966" alt="Marble Shower Niche" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/marble-shower-niche.jpg" alt="Marble Shower Niche" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/marble-shower-niche-480.webp 480w, assets/images/optimized/portfolio/new/marble-shower-niche-960.webp 960w, assets/images/optimized/portfolio/new/marble-shower-niche-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Marble Shower Niche</strong>
@@ -564,10 +576,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/vertical-tile-tub-surround.jpg"
+        <button class="gallery-open" type="button" aria-label="View Vertical Tub Surround"
+          data-full="assets/images/optimized/portfolio/new/vertical-tile-tub-surround-full.webp"
           data-title="Vertical Tub Surround">
-          <img src="assets/images/portfolio/new/vertical-tile-tub-surround.jpg" width="966" height="2200" alt="Vertical Tub Surround" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/vertical-tile-tub-surround.jpg" alt="Vertical Tub Surround" width="966" height="2200" srcset="assets/images/optimized/portfolio/new/vertical-tile-tub-surround-480.webp 480w, assets/images/optimized/portfolio/new/vertical-tile-tub-surround-960.webp 960w, assets/images/optimized/portfolio/new/vertical-tile-tub-surround-966.webp 966w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Vertical Tub Surround</strong>
@@ -577,10 +589,10 @@
       </article>
 
       <article class="masonry-item" data-project="custom">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/mirrored-bar-wall-2.jpg"
+        <button class="gallery-open" type="button" aria-label="View Mirror Bar Backsplash"
+          data-full="assets/images/optimized/portfolio/new/mirrored-bar-wall-2-full.webp"
           data-title="Mirror Bar Backsplash">
-          <img src="assets/images/portfolio/new/mirrored-bar-wall-2.jpg" width="2200" height="966" alt="Mirror Bar Backsplash" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/mirrored-bar-wall-2.jpg" alt="Mirror Bar Backsplash" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/mirrored-bar-wall-2-480.webp 480w, assets/images/optimized/portfolio/new/mirrored-bar-wall-2-960.webp 960w, assets/images/optimized/portfolio/new/mirrored-bar-wall-2-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Custom Work</small>
             <strong>Mirror Bar Backsplash</strong>
@@ -590,10 +602,10 @@
       </article>
 
       <article class="masonry-item" data-project="custom">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/marble-entertainment-wall.jpg"
+        <button class="gallery-open" type="button" aria-label="View Large-Format Feature Wall"
+          data-full="assets/images/optimized/portfolio/new/marble-entertainment-wall-full.webp"
           data-title="Large-Format Feature Wall">
-          <img src="assets/images/portfolio/new/marble-entertainment-wall.jpg" width="2200" height="966" alt="Large-Format Feature Wall" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/marble-entertainment-wall.jpg" alt="Large-Format Feature Wall" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/marble-entertainment-wall-480.webp 480w, assets/images/optimized/portfolio/new/marble-entertainment-wall-960.webp 960w, assets/images/optimized/portfolio/new/marble-entertainment-wall-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Custom Work</small>
             <strong>Large-Format Feature Wall</strong>
@@ -603,10 +615,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/metallic-laundry-backsplash.jpg"
+        <button class="gallery-open" type="button" aria-label="View Stainless Laundry Backsplash"
+          data-full="assets/images/optimized/portfolio/new/metallic-laundry-backsplash-full.webp"
           data-title="Stainless Laundry Backsplash">
-          <img src="assets/images/portfolio/new/metallic-laundry-backsplash.jpg" width="2200" height="966" alt="Stainless Laundry Backsplash" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/metallic-laundry-backsplash.jpg" alt="Stainless Laundry Backsplash" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/metallic-laundry-backsplash-480.webp 480w, assets/images/optimized/portfolio/new/metallic-laundry-backsplash-960.webp 960w, assets/images/optimized/portfolio/new/metallic-laundry-backsplash-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Stainless Laundry Backsplash</strong>
@@ -616,10 +628,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/gray-shower-blue-accent.jpg"
+        <button class="gallery-open" type="button" aria-label="View Custom Curbless Shower"
+          data-full="assets/images/optimized/portfolio/new/gray-shower-blue-accent-full.webp"
           data-title="Custom Curbless Shower">
-          <img src="assets/images/portfolio/new/gray-shower-blue-accent.jpg" width="966" height="2200" alt="Custom Curbless Shower" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/gray-shower-blue-accent.jpg" alt="Custom Curbless Shower" width="966" height="2200" srcset="assets/images/optimized/portfolio/new/gray-shower-blue-accent-480.webp 480w, assets/images/optimized/portfolio/new/gray-shower-blue-accent-960.webp 960w, assets/images/optimized/portfolio/new/gray-shower-blue-accent-966.webp 966w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Custom Curbless Shower</strong>
@@ -629,10 +641,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/mustard-kitchen-backsplash-1.jpg"
+        <button class="gallery-open" type="button" aria-label="View Mustard Picket Backsplash"
+          data-full="assets/images/optimized/portfolio/new/mustard-kitchen-backsplash-1-full.webp"
           data-title="Mustard Picket Backsplash">
-          <img src="assets/images/portfolio/new/mustard-kitchen-backsplash-1.jpg" width="2200" height="1650" alt="Mustard Picket Backsplash" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/mustard-kitchen-backsplash-1.jpg" alt="Mustard Picket Backsplash" width="2200" height="1650" srcset="assets/images/optimized/portfolio/new/mustard-kitchen-backsplash-1-480.webp 480w, assets/images/optimized/portfolio/new/mustard-kitchen-backsplash-1-960.webp 960w, assets/images/optimized/portfolio/new/mustard-kitchen-backsplash-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Mustard Picket Backsplash</strong>
@@ -642,10 +654,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/checker-floor-bathroom-1.jpg"
+        <button class="gallery-open" type="button" aria-label="View Checker Bathroom Floor"
+          data-full="assets/images/optimized/portfolio/new/checker-floor-bathroom-1-full.webp"
           data-title="Checker Bathroom Floor">
-          <img src="assets/images/portfolio/new/checker-floor-bathroom-1.jpg" width="2200" height="1650" alt="Checker Bathroom Floor" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/checker-floor-bathroom-1.jpg" alt="Checker Bathroom Floor" width="2200" height="1650" srcset="assets/images/optimized/portfolio/new/checker-floor-bathroom-1-480.webp 480w, assets/images/optimized/portfolio/new/checker-floor-bathroom-1-960.webp 960w, assets/images/optimized/portfolio/new/checker-floor-bathroom-1-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Checker Bathroom Floor</strong>
@@ -655,10 +667,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/checker-floor-bathroom-2.jpg"
+        <button class="gallery-open" type="button" aria-label="View Checker Floor &amp; Simple Tub Surround"
+          data-full="assets/images/optimized/portfolio/new/checker-floor-bathroom-2-full.webp"
           data-title="Checker Floor &amp; Simple Tub Surround">
-          <img src="assets/images/portfolio/new/checker-floor-bathroom-2.jpg" width="1650" height="2200" alt="Checker Floor &amp; Simple Tub Surround" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/checker-floor-bathroom-2.jpg" alt="Checker Floor &amp; Simple Tub Surround" width="1650" height="2200" srcset="assets/images/optimized/portfolio/new/checker-floor-bathroom-2-480.webp 480w, assets/images/optimized/portfolio/new/checker-floor-bathroom-2-960.webp 960w, assets/images/optimized/portfolio/new/checker-floor-bathroom-2-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Checker Floor &amp; Simple Tub Surround</strong>
@@ -668,10 +680,10 @@
       </article>
 
       <article class="masonry-item" data-project="bathrooms">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/vertical-tile-full-bath.jpg"
+        <button class="gallery-open" type="button" aria-label="View Vertical Bathroom with 1&quot; Hexagon"
+          data-full="assets/images/optimized/portfolio/new/vertical-tile-full-bath-full.webp"
           data-title="Vertical Bathroom with 1&quot; Hexagon">
-          <img src="assets/images/portfolio/new/vertical-tile-full-bath.jpg" width="1650" height="2200" alt="Vertical Bathroom with 1&quot; Hexagon" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/vertical-tile-full-bath.jpg" alt="Vertical Bathroom with 1&quot; Hexagon" width="1650" height="2200" srcset="assets/images/optimized/portfolio/new/vertical-tile-full-bath-480.webp 480w, assets/images/optimized/portfolio/new/vertical-tile-full-bath-960.webp 960w, assets/images/optimized/portfolio/new/vertical-tile-full-bath-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Bathrooms</small>
             <strong>Vertical Bathroom with 1&quot; Hexagon</strong>
@@ -681,10 +693,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/rustic-brown-shower.jpg"
+        <button class="gallery-open" type="button" aria-label="View Rustic Brown Shower"
+          data-full="assets/images/optimized/portfolio/new/rustic-brown-shower-full.webp"
           data-title="Rustic Brown Shower">
-          <img src="assets/images/portfolio/new/rustic-brown-shower.jpg" width="1650" height="2200" alt="Rustic Brown Shower" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/rustic-brown-shower.jpg" alt="Rustic Brown Shower" width="1650" height="2200" srcset="assets/images/optimized/portfolio/new/rustic-brown-shower-480.webp 480w, assets/images/optimized/portfolio/new/rustic-brown-shower-960.webp 960w, assets/images/optimized/portfolio/new/rustic-brown-shower-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Rustic Brown Shower</strong>
@@ -694,10 +706,10 @@
       </article>
 
       <article class="masonry-item" data-project="flooring">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Green &amp; Brass Mosaic Floor"
           data-full="assets/images/portfolio/new/decorative-pattern-floor.jpg"
           data-title="Green &amp; Brass Mosaic Floor">
-          <img src="assets/images/portfolio/new/decorative-pattern-floor.jpg" width="1650" height="2200" alt="Green &amp; Brass Mosaic Floor" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/decorative-pattern-floor.jpg" alt="Green &amp; Brass Mosaic Floor" width="1650" height="2200" srcset="assets/images/optimized/portfolio/new/decorative-pattern-floor-480.webp 480w, assets/images/optimized/portfolio/new/decorative-pattern-floor-960.webp 960w, assets/images/optimized/portfolio/new/decorative-pattern-floor-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Flooring</small>
             <strong>Green &amp; Brass Mosaic Floor</strong>
@@ -707,10 +719,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/black-subway-backsplash.jpg"
+        <button class="gallery-open" type="button" aria-label="View Black Subway Backsplash"
+          data-full="assets/images/optimized/portfolio/new/black-subway-backsplash-full.webp"
           data-title="Black Subway Backsplash">
-          <img src="assets/images/portfolio/new/black-subway-backsplash.jpg" width="2200" height="1650" alt="Black Subway Backsplash" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/black-subway-backsplash.jpg" alt="Black Subway Backsplash" width="2200" height="1650" srcset="assets/images/optimized/portfolio/new/black-subway-backsplash-480.webp 480w, assets/images/optimized/portfolio/new/black-subway-backsplash-960.webp 960w, assets/images/optimized/portfolio/new/black-subway-backsplash-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Black Subway Backsplash</strong>
@@ -720,10 +732,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/stone-look-shower.jpg"
+        <button class="gallery-open" type="button" aria-label="View Stone Walk-In Shower"
+          data-full="assets/images/optimized/portfolio/new/stone-look-shower-full.webp"
           data-title="Stone Walk-In Shower">
-          <img src="assets/images/portfolio/new/stone-look-shower.jpg" width="1650" height="2200" alt="Stone Walk-In Shower" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/stone-look-shower.jpg" alt="Stone Walk-In Shower" width="1650" height="2200" srcset="assets/images/optimized/portfolio/new/stone-look-shower-480.webp 480w, assets/images/optimized/portfolio/new/stone-look-shower-960.webp 960w, assets/images/optimized/portfolio/new/stone-look-shower-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Stone Walk-In Shower</strong>
@@ -733,10 +745,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/pebble-shower-floor.jpg"
+        <button class="gallery-open" type="button" aria-label="View Pebble Shower Floor"
+          data-full="assets/images/optimized/portfolio/new/pebble-shower-floor-full.webp"
           data-title="Pebble Shower Floor">
-          <img src="assets/images/portfolio/new/pebble-shower-floor.jpg" width="2200" height="1650" alt="Pebble Shower Floor" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/pebble-shower-floor.jpg" alt="Pebble Shower Floor" width="2200" height="1650" srcset="assets/images/optimized/portfolio/new/pebble-shower-floor-480.webp 480w, assets/images/optimized/portfolio/new/pebble-shower-floor-960.webp 960w, assets/images/optimized/portfolio/new/pebble-shower-floor-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Pebble Shower Floor</strong>
@@ -746,10 +758,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/woven-niche-detail.jpg"
+        <button class="gallery-open" type="button" aria-label="View Herringbone Niche"
+          data-full="assets/images/optimized/portfolio/new/woven-niche-detail-full.webp"
           data-title="Herringbone Niche">
-          <img src="assets/images/portfolio/new/woven-niche-detail.jpg" width="1650" height="2200" alt="Herringbone Niche" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/woven-niche-detail.jpg" alt="Herringbone Niche" width="1650" height="2200" srcset="assets/images/optimized/portfolio/new/woven-niche-detail-480.webp 480w, assets/images/optimized/portfolio/new/woven-niche-detail-960.webp 960w, assets/images/optimized/portfolio/new/woven-niche-detail-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Herringbone Niche</strong>
@@ -759,10 +771,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Gray Shower with Accent Strips"
           data-full="assets/images/portfolio/new/gray-shower-vertical-accents.jpg"
           data-title="Gray Shower with Accent Strips">
-          <img src="assets/images/portfolio/new/gray-shower-vertical-accents.jpg" width="1080" height="1619" alt="Gray Shower with Accent Strips" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/gray-shower-vertical-accents.jpg" alt="Gray Shower with Accent Strips" width="1080" height="1619" srcset="assets/images/optimized/portfolio/new/gray-shower-vertical-accents-480.webp 480w, assets/images/optimized/portfolio/new/gray-shower-vertical-accents-960.webp 960w, assets/images/optimized/portfolio/new/gray-shower-vertical-accents-1080.webp 1080w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Gray Shower with Accent Strips</strong>
@@ -772,10 +784,10 @@
       </article>
 
       <article class="masonry-item" data-project="backsplashes">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/white-herringbone-range-detail.jpg"
+        <button class="gallery-open" type="button" aria-label="View Herringbone Range"
+          data-full="assets/images/optimized/portfolio/new/white-herringbone-range-detail-full.webp"
           data-title="Herringbone Range">
-          <img src="assets/images/portfolio/new/white-herringbone-range-detail.jpg" width="2200" height="1650" alt="Herringbone Range" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/white-herringbone-range-detail.jpg" alt="Herringbone Range" width="2200" height="1650" srcset="assets/images/optimized/portfolio/new/white-herringbone-range-detail-480.webp 480w, assets/images/optimized/portfolio/new/white-herringbone-range-detail-960.webp 960w, assets/images/optimized/portfolio/new/white-herringbone-range-detail-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Backsplashes</small>
             <strong>Herringbone Range</strong>
@@ -785,10 +797,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/light-shower-entry.jpg"
+        <button class="gallery-open" type="button" aria-label="View Light Mosaic Shower"
+          data-full="assets/images/optimized/portfolio/new/light-shower-entry-full.webp"
           data-title="Light Mosaic Shower">
-          <img src="assets/images/portfolio/new/light-shower-entry.jpg" width="966" height="2200" alt="Light Mosaic Shower" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/light-shower-entry.jpg" alt="Light Mosaic Shower" width="966" height="2200" srcset="assets/images/optimized/portfolio/new/light-shower-entry-480.webp 480w, assets/images/optimized/portfolio/new/light-shower-entry-960.webp 960w, assets/images/optimized/portfolio/new/light-shower-entry-966.webp 966w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Light Mosaic Shower</strong>
@@ -798,10 +810,10 @@
       </article>
 
       <article class="masonry-item" data-project="custom">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Mosaic Exterior Steps"
           data-full="assets/images/portfolio/new/mosaic-exterior-steps.jpg"
           data-title="Mosaic Exterior Steps">
-          <img src="assets/images/portfolio/new/mosaic-exterior-steps.jpg" width="2200" height="966" alt="Mosaic Exterior Steps" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/mosaic-exterior-steps.jpg" alt="Mosaic Exterior Steps" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/mosaic-exterior-steps-480.webp 480w, assets/images/optimized/portfolio/new/mosaic-exterior-steps-960.webp 960w, assets/images/optimized/portfolio/new/mosaic-exterior-steps-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Custom Work</small>
             <strong>Mosaic Exterior Steps</strong>
@@ -811,10 +823,10 @@
       </article>
 
       <article class="masonry-item" data-project="showers">
-        <button class="gallery-open" type="button"
-          data-full="assets/images/portfolio/new/marble-hand-shower.jpg"
+        <button class="gallery-open" type="button" aria-label="View Marble Shower Full View"
+          data-full="assets/images/optimized/portfolio/new/marble-hand-shower-full.webp"
           data-title="Marble Shower Full View">
-          <img src="assets/images/portfolio/new/marble-hand-shower.jpg" width="966" height="2200" alt="Marble Shower Full View" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/marble-hand-shower.jpg" alt="Marble Shower Full View" width="966" height="2200" srcset="assets/images/optimized/portfolio/new/marble-hand-shower-480.webp 480w, assets/images/optimized/portfolio/new/marble-hand-shower-960.webp 960w, assets/images/optimized/portfolio/new/marble-hand-shower-966.webp 966w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Showers</small>
             <strong>Marble Shower Full View</strong>
@@ -824,10 +836,10 @@
       </article>
 
       <article class="masonry-item" data-project="custom">
-        <button class="gallery-open" type="button"
+        <button class="gallery-open" type="button" aria-label="View Shoreline Mosaic Feature Wall"
           data-full="assets/images/portfolio/new/blue-mosaic-feature-wall.jpg"
           data-title="Shoreline Mosaic Feature Wall">
-          <img src="assets/images/portfolio/new/blue-mosaic-feature-wall.jpg" width="2200" height="966" alt="Shoreline Mosaic Feature Wall" loading="lazy" decoding="async">
+          <img src="assets/images/portfolio/new/blue-mosaic-feature-wall.jpg" alt="Shoreline Mosaic Feature Wall" width="2200" height="966" srcset="assets/images/optimized/portfolio/new/blue-mosaic-feature-wall-480.webp 480w, assets/images/optimized/portfolio/new/blue-mosaic-feature-wall-960.webp 960w, assets/images/optimized/portfolio/new/blue-mosaic-feature-wall-1440.webp 1440w" sizes="(max-width: 700px) 94vw, (max-width: 1100px) 46vw, 31vw" loading="lazy" decoding="async">
           <span class="gallery-caption">
             <small>Custom Work</small>
             <strong>Shoreline Mosaic Feature Wall</strong>
@@ -839,10 +851,10 @@
     </div>
   </div>
 </section>
-<div class="lightbox" id="lightbox" hidden>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" hidden>
   <button class="lightbox-close" type="button" aria-label="Close image">×</button>
-  <img src="" alt="">
-  <p></p>
+  <img alt="">
+  <p id="lightbox-caption"></p>
 </div>
 <section class="cta"><div class="container"><div><h2>Have a project that belongs here?</h2><p>Send the room, materials, approximate size, and schedule.</p></div><a class="btn btn-outline" href="contact.html#estimate">Request an Estimate</a></div></section>
 
@@ -855,21 +867,21 @@
       <p>Custom tile, stone, shower, flooring, backsplash, fireplace, and design work completed with careful preparation and lasting attention to detail.</p>
     </div>
     <div>
-      <h3>Explore</h3>
+      <h2 class="footer-heading">Explore</h2>
       <a href="services.html">Services</a>
       <a href="projects.html">Projects</a>
-      <!--<a href="reviews.html">Reviews</a>-->
+      <a href="reviews.html">Reviews</a>
       <a href="about.html">About</a>
     </div>
     <div>
-      <h3>Services</h3>
+      <h2 class="footer-heading">Services</h2>
       <a href="service-showers.html">Custom Showers</a>
       <a href="service-flooring.html">Tile Flooring</a>
       <a href="service-backsplashes.html">Backsplashes</a>
       <a href="service-stone.html">Natural Stone</a>
     </div>
     <div>
-      <h3>Contact</h3>
+      <h2 class="footer-heading">Contact</h2>
       <a href="tel:+19705562889">(970) 556-2889</a>
       <a href="contact.html#estimate">Request an Estimate</a>
       <p>Northern Colorado<br>Consultations by appointment</p>

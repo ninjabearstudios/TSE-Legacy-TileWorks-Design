@@ -1061,3 +1061,75 @@ input:focus,select:focus,textarea:focus {
         grid-template-columns:1fr
     }
 }
+/* Audit remediation: selectors deliberately exclude the estimate form. */
+.hero-grid { grid-template-columns:minmax(0,1.1fr) minmax(0,1.2fr); }
+.hero-copy { min-width:0; padding:2.5rem 1.5rem 2.5rem 1.8rem; }
+.hero-title { font-size:clamp(2.1rem,4.4vw,5.3rem); overflow-wrap:anywhere; }
+.hero-copy p { overflow-wrap:anywhere; }
+.hero,.hero-grid { min-height:550px; }
+.hero-actions .btn { max-width:100%; text-align:center; }
+.hero-rule { margin:.5rem 0 1rem; }
+.hero-title { margin-bottom:1rem; }
+.navbar { grid-template-columns:250px minmax(0,1fr); gap:1.5rem; }
+.logo-wrap img { width:250px; height:100px; transform:none; }
+.nav { gap:clamp(.8rem,1.6vw,2rem); }
+.nav-cta { text-align:center; }
+.nav a { flex-shrink:0; }
+.nav { font-size:.77rem; }
+.utility-right { gap:1rem; flex-wrap:wrap; justify-content:flex-end; }
+.utility { height:auto; min-height:40px; }
+.utility .container { min-height:40px; }
+.about-biography { display:block; max-width:850px; }
+.service-mini .service-title { font-size:1.35rem; margin-bottom:.7rem; text-transform:uppercase; letter-spacing:.03em; }
+.why-item .principle-title { font-family:Inter,Arial,sans-serif; text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; margin:.2rem 0 .5rem; }
+.legacy-promise { font-family:"Cormorant Garamond",Georgia,serif; font-size:1rem; font-weight:500; line-height:1.05; margin:0 0 1.33rem; }
+.footer .footer-heading { font-family:Inter,Arial,sans-serif; color:var(--gold-light); font-size:.76rem; text-transform:uppercase; letter-spacing:.1em; }
+.cta .btn-outline { background:#10110e; color:#f1ede4; border-color:#10110e; }
+.cta .btn-outline:hover { background:#24251e; }
+.cta .btn-outline:active { background:#090a08; transform:none; }
+.cta .btn-outline:focus-visible { outline:3px solid #f1ede4; outline-offset:3px; box-shadow:0 0 0 6px #10110e; }
+a:focus-visible,button:not(#estimate-form button):focus-visible { outline:3px solid #e0cd83; outline-offset:4px; }
+#estimate { scroll-margin-top:135px; }
+#gallery { scroll-margin-top:135px; }
+.page-hero h1 { overflow-wrap:anywhere; }
+.about-image img { height:auto; }
+.lightbox { overflow:auto; }
+.lightbox img { width:auto; height:auto; max-height:75vh; }
+.lightbox p { text-align:center; }
+@media(max-width:1100px) {
+  .menu-toggle { display:block; }
+  .navbar { grid-template-columns:minmax(0,1fr) auto; }
+  .nav { display:none; position:absolute; top:100%; left:0; right:0; background:#080906; flex-direction:column; align-items:stretch; padding:1rem 3vw; border-bottom:1px solid var(--line); gap:.5rem; max-height:calc(100dvh - 118px); overflow-y:auto; }
+  .nav.open { display:flex; }
+}
+@media(max-width:900px) {
+  .hero-grid { grid-template-columns:minmax(0,1fr); }
+  .hero-copy { padding:2.5rem 3vw; }
+  .hero-title { font-size:clamp(2.1rem,7.4vw,4rem); }
+}
+@media(max-width:650px) {
+  .navbar { gap:.6rem; }
+  .logo-wrap img { width:210px; height:86px; }
+  .nav { top:100%; max-height:calc(100dvh - 95px); }
+  .utility-right { gap:.25rem 1rem; font-size:.7rem; }
+  .hero-copy { padding:2rem 3vw; }
+  .hero-actions { gap:.75rem; }
+  .page-hero { padding:3rem 0; }
+  .page-hero h1 { font-size:clamp(2.2rem,10vw,3.3rem); }
+  .section-heading { gap:1rem; }
+  .footer-logo { max-width:100%; }
+  #estimate,#gallery { scroll-margin-top:110px; }
+}
+.hero-image img { position:absolute; inset:0; }
+.nav { flex-wrap:wrap; }
+.nav a { max-width:100%; overflow-wrap:anywhere; }
+.home-page main :is(div,article) { min-width:0; }
+.home-page main :is(h2,h3,p,a) { overflow-wrap:anywhere; }
+.home-page .cta .container { flex-wrap:wrap; }
+.home-page .cta .btn { max-width:100%; text-align:center; }
+.footer-grid > div { min-width:0; overflow-wrap:anywhere; }
+@media(min-width:651px) {
+  .home-page .services-strip { grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr)); }
+  .home-page .why-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr)); }
+}
+.home-page .testimonial { overflow-wrap:anywhere; }
