@@ -66,9 +66,31 @@ if (initialFilter) {
 const form = document.querySelector("#estimate-form");
 if (form) {
   let submitting = false;
+  const attachments = form.querySelector('#attachments');
+  const validateAttachments = () => {
+    if (!attachments) return true;
+    const files = Array.from(attachments.files || []);
+    let message = '';
+    if (files.length > 5) message = 'Please choose no more than 5 attachments.';
+    else if (files.some(file => !/\.(jpe?g|png|webp|pdf)$/i.test(file.name)))
+      message = 'Please choose JPG, PNG, WebP or PDF files.';
+    else if (files.some(file => file.size === 0 || file.size > 5 * 1024 * 1024))
+      message = 'Each attachment must contain data and be no larger than 5 MB.';
+    else if (files.reduce((total, file) => total + file.size, 0) > 10 * 1024 * 1024)
+      message = 'Please keep the combined attachment size at 10 MB or less.';
+    attachments.setCustomValidity(message);
+    return !message;
+  };
+  attachments?.addEventListener('change', () => {
+    validateAttachments();
+    attachments.reportValidity();
+  });
+
   form.addEventListener("submit", async e => {
     e.preventDefault();
-    if (submitting || !form.reportValidity()) return;
+    if (submitting) return;
+    validateAttachments();
+    if (!form.reportValidity()) return;
     const data = new FormData(form);
     const status = document.querySelector("#form-status");
     const required = ["name","phone","email","projectType","details"];
@@ -81,11 +103,14 @@ if (form) {
     button.disabled = true;
     form.setAttribute("aria-busy", "true");
     status.textContent = "Sending your request…";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
     try {
       const response = await fetch(form.action, {
         method: "POST",
         headers: { Accept: "application/json" },
-        body: data
+        body: data,
+        signal: controller.signal
       });
       const result = await response.json();
       if (!response.ok || result.ok !== true) {
@@ -94,10 +119,13 @@ if (form) {
       status.textContent = result.message;
       form.reset();
     } catch (error) {
-      status.textContent = error instanceof SyntaxError || error instanceof TypeError
+      status.textContent = controller.signal.aborted
+        ? "We couldn’t confirm your request within 15 seconds. It may still have reached Cameron. Your details are saved here; please call (970) 556-2889 before sending again."
+        : error instanceof SyntaxError || error instanceof TypeError
         ? "We couldn’t confirm your request was sent. Please try again or call (970) 556-2889."
         : error.message;
     } finally {
+      clearTimeout(timeout);
       submitting = false;
       button.disabled = false;
       form.removeAttribute("aria-busy");

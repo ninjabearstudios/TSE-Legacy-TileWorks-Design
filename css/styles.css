@@ -1138,3 +1138,8 @@ a:focus-visible,button:not(#estimate-form button):focus-visible { outline:3px so
 .form-trap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 #estimate-form :is(input,select,textarea,button):focus-visible{outline:2px solid var(--gold,#c7a65b);outline-offset:3px}
 #estimate-form button:disabled{opacity:.65;cursor:wait}
+
+/* Attachment picker remains inside the narrow mobile form column. */
+#estimate-form .attachment-help{display:block;margin-top:8px;font-size:12px;line-height:1.6;font-weight:400;letter-spacing:normal;text-transform:none;color:var(--muted,#c7c4bb)}
+#estimate-form input[type="file"]{min-width:0;max-width:100%;font-size:13px}
+#estimate-form input[type="file"]::file-selector-button{margin-right:10px;padding:8px 10px;border:1px solid var(--gold,#c7a65b);background:#171812;color:#f5f1e7;cursor:pointer}

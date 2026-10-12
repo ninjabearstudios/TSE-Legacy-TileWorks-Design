@@ -11,18 +11,24 @@ function setup(fetch) {
     projectType: 'Custom shower', details: 'Test project', website: ''
   }};
   const button = { disabled: false };
+  const attachments = { files: [], message: '', setCustomValidity(message) { this.message = message; },
+    addEventListener(_, callback) { state.change = callback; }, reportValidity() { return !this.message; } };
+  state.attachments = attachments;
   const status = { textContent: '', focus() { state.focus++; } };
   const form = {
     action: 'https://example.test/send-estimate.php',
-    reportValidity: () => state.valid !== false,
+    reportValidity: () => state.valid !== false && !attachments.message,
     addEventListener: (_, callback) => { state.submit = () => callback({ preventDefault() {} }); },
-    querySelector: () => button, setAttribute() {}, removeAttribute() {},
+    querySelector: selector => selector === '#attachments' ? attachments : button, setAttribute() {}, removeAttribute() {},
     reset() { state.resets++; }
   };
   vm.runInNewContext(handler, {
     document: { querySelector: selector => selector === '#estimate-form' ? form : status },
     FormData: class { get(key) { return state.data[key]; } },
     fetch: async (...args) => { state.requests++; state.args = args; return fetch(...args); },
+    AbortController,
+    setTimeout(callback, delay) { state.timeout = callback; state.delay = delay; return 1; },
+    clearTimeout(id) { assert.equal(id, 1); state.timerCleared = true; },
     SyntaxError, TypeError, Error
   });
   return { state, button, status };
@@ -40,6 +46,8 @@ function setup(fetch) {
   assert.equal(success.status.textContent, 'Submitted to Cameron.');
   assert.equal(success.state.resets, 1);
   assert.equal(success.button.disabled, false);
+  assert.equal(success.state.timerCleared, true);
+  assert.equal(success.state.args[1].signal.aborted, false);
   assert.equal(success.state.args[1].method, 'POST');
   assert.equal(success.state.args[1].headers.Accept, 'application/json');
   const invalid = setup(() => { throw Error('must not submit'); });
@@ -62,6 +70,42 @@ function setup(fetch) {
     assert(test.status.textContent.length > 0);
     assert.equal(test.state.focus, 1);
   }
+  for (const files of [
+    Array.from({length:6}, () => ({name:'photo.jpg',size:10})),
+    [{name:'script.php',size:10}], [{name:'empty.png',size:0}],
+    [{name:'large.pdf',size:5*1024*1024+1}],
+    Array.from({length:3}, () => ({name:'photo.jpg',size:4*1024*1024}))
+  ]) {
+    const test = setup(() => { throw Error('invalid attachments must not submit'); });
+    test.state.attachments.files = files;
+    await test.state.submit();
+    assert.equal(test.state.requests, 0);
+    assert(test.state.attachments.message);
+    test.state.attachments.files = [{name:'photo.JPG',size:100}];
+    test.state.change();
+    assert.equal(test.state.attachments.message, '', 'corrected selection clears the error');
+  }
+  for (const stage of ['upload', 'response body']) {
+    const stalled = setup((url, { signal }) => {
+      const waiting = new Promise((resolve, reject) => {
+        signal.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')));
+      });
+      return stage === 'upload' ? waiting : { ok: true, json: () => waiting };
+    });
+    const sending = stalled.state.submit();
+    await Promise.resolve();
+    await Promise.resolve();
+    assert.equal(stalled.state.delay, 15000);
+    stalled.state.timeout();
+    await sending;
+    assert.equal(stalled.state.args[1].signal.aborted, true);
+    assert.equal(stalled.button.disabled, false);
+    assert.equal(stalled.state.resets, 0, 'timeout preserves entered details and files');
+    assert.equal(stalled.state.timerCleared, true);
+    assert.equal(stalled.state.focus, 1);
+    assert.match(stalled.status.textContent, /may still have reached Cameron/);
+    assert.match(stalled.status.textContent, /15 seconds/);
+  }
   assert(!handler.includes('mailto:'));
-  console.log('PASS: validation, POST, pending state, duplicate prevention, success reset, and error recovery. No email sent.');
+  console.log('PASS: validation, POST, pending state, duplicate prevention, success reset, 15-second upload/response timeouts, and error recovery. No email sent.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

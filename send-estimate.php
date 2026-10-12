@@ -35,8 +35,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     header('Allow: POST');
     respond(405, false, 'Please submit the estimate form to send a request.');
 }
-if ((int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 32768) {
-    respond(413, false, 'Your request is too long. Please shorten the project details.');
+if ((int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 12 * 1024 * 1024
+    || ((int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0 && empty($_POST) && empty($_FILES))) {
+    respond(413, false, 'The upload is too large for this server. Keep attachments under 5 MB each and 10 MB total, or include sharing links.');
 }
 // Reject cross-site browser submissions; native same-origin and no-JS POSTs work.
 if (isset($_SERVER['HTTP_ORIGIN'])) {
@@ -110,6 +111,74 @@ if ($saved === false) {
     respond(503, false, FAILURE);
 }
 
+
+// PHP keeps uploads in temporary storage and removes them after the request.
+// Do not publish uploads or trust browser-supplied MIME types/filenames.
+$attachments = [];
+if (array_diff(array_keys($_FILES), ['attachments'])) {
+    respond(422, false, 'Please use the attachment picker on the contact page.');
+}
+if (isset($_FILES['attachments'])) {
+    $upload = $_FILES['attachments'];
+    foreach (['name', 'tmp_name', 'error', 'size'] as $key) {
+        if (!isset($upload[$key]) || !is_array($upload[$key])) {
+            respond(422, false, 'The attachments could not be read. Please select them again.');
+        }
+    }
+    if (count($upload['error']) > 5) {
+        respond(422, false, 'Please choose no more than 5 attachments.');
+    }
+    foreach (['name', 'tmp_name', 'size'] as $key) {
+        if (array_keys($upload[$key]) !== array_keys($upload['error'])) {
+            respond(422, false, 'The attachments could not be read. Please select them again.');
+        }
+    }
+    $allowed = ['image/jpeg' => ['jpg', 'jpeg'], 'image/png' => ['png'],
+        'image/webp' => ['webp'], 'application/pdf' => ['pdf']];
+    $totalBytes = 0;
+    foreach ($upload['error'] as $index => $error) {
+        if (!is_int($error) || !is_string($upload['name'][$index])
+            || !is_string($upload['tmp_name'][$index]) || !is_int($upload['size'][$index])) {
+            respond(422, false, 'The attachments could not be read. Please select them again.');
+        }
+        if ($error === UPLOAD_ERR_NO_FILE) continue;
+        if ($error === UPLOAD_ERR_INI_SIZE || $error === UPLOAD_ERR_FORM_SIZE) {
+            respond(413, false, 'An attachment exceeds the upload limit. Use files under 5 MB or include a sharing link.');
+        }
+        if ($error !== UPLOAD_ERR_OK) {
+            respond(422, false, 'An attachment did not finish uploading. Please select your files and try again.');
+        }
+        $path = $upload['tmp_name'][$index];
+        if (!is_uploaded_file($path)) respond(422, false, 'Invalid attachment upload.');
+        $bytes = filesize($path);
+        if ($bytes === false || $bytes < 1 || $bytes > 5 * 1024 * 1024) {
+            respond(413, false, 'Each attachment must contain data and be no larger than 5 MB.');
+        }
+        $totalBytes += $bytes;
+        if ($totalBytes > 10 * 1024 * 1024) {
+            respond(413, false, 'Please keep the combined attachment size at 10 MB or less.');
+        }
+        if (!class_exists('finfo')) {
+            error_log('Legacy TileWorks estimate: PHP fileinfo extension is required for attachments.');
+            respond(503, false, 'Attachments are temporarily unavailable. Remove them and include sharing links instead, or call (970) 556-2889.');
+        }
+        $mime = (new finfo(FILEINFO_MIME_TYPE))->file($path);
+        $extension = strtolower(pathinfo($upload['name'][$index], PATHINFO_EXTENSION));
+        if (!isset($allowed[$mime]) || !in_array($extension, $allowed[$mime], true)) {
+            respond(422, false, 'Only genuine JPG, PNG, WebP or PDF files are accepted. Please check your attachments.');
+        }
+        if (strpos($mime, 'image/') === 0) {
+            $image = @getimagesize($path);
+            if (!$image || ($image['mime'] ?? '') !== $mime) {
+                respond(422, false, 'An image attachment could not be read. Please export it as JPG, PNG or WebP.');
+            }
+        }
+        // Generate header-safe names; untrusted original filenames never enter MIME headers.
+        $attachments[] = ['path' => $path, 'mime' => $mime,
+            'name' => 'project-attachment-' . (count($attachments) + 1) . '.' . $allowed[$mime][0]];
+    }
+}
+
 $body = "New estimate request from the Legacy TileWorks website\n\n";
 foreach (['name' => 'Name', 'phone' => 'Phone', 'email' => 'Email', 'location' => 'Project location',
     'projectType' => 'Project type', 'timeline' => 'Timeline', 'budget' => 'Budget', 'details' => 'Project details'] as $field => $label) {
@@ -124,8 +193,27 @@ $headers = [
     'Content-Type' => 'text/plain; charset=UTF-8',
     'Content-Transfer-Encoding' => 'base64'
 ];
+$message = chunk_split(base64_encode($body));
+if ($attachments) {
+    $boundary = 'tileworks_' . bin2hex(random_bytes(18));
+    $headers['Content-Type'] = 'multipart/mixed; boundary="' . $boundary . '"';
+    unset($headers['Content-Transfer-Encoding']);
+    $message = '--' . $boundary . "\r\n"
+        . "Content-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n"
+        . chunk_split(base64_encode($body));
+    foreach ($attachments as $attachment) {
+        $contents = file_get_contents($attachment['path']);
+        if ($contents === false) respond(503, false, FAILURE);
+        $message .= '--' . $boundary . "\r\n"
+            . 'Content-Type: ' . $attachment['mime'] . "\r\n"
+            . 'Content-Disposition: attachment; filename="' . $attachment['name'] . "\"\r\n"
+            . "Content-Transfer-Encoding: base64\r\n\r\n"
+            . chunk_split(base64_encode($contents));
+    }
+    $message .= '--' . $boundary . "--\r\n";
+}
 $sent = function_exists('mail') && @mail(RECIPIENT, 'Legacy TileWorks estimate request',
-    chunk_split(base64_encode($body)), $headers);
+    $message, $headers);
 if (!$sent) {
     error_log('Legacy TileWorks estimate: mail transport did not accept the message.');
     respond(503, false, FAILURE);

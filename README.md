@@ -39,12 +39,12 @@ Then visit `http://localhost:8000`.
 
 This section supersedes the historical audit notes below that say form work is deferred or the mailto handler is unchanged.
 
-The estimate form now POSTs to `send-estimate.php`, which uses the hosting server's PHP mail transport to address requests to **Cameron@tselegacytileworks.com**. The visitor stays on the page and receives confirmation only when the server accepts the email for sending. No email application opens. Cameron can reply directly to the visitor through the message's Reply-To header. Requests include all eight visible form fields; photographs can be shared as links in Project Details, not attachments.
+The estimate form now POSTs to `send-estimate.php`, which uses the hosting server's PHP mail transport to address requests to **Cameron@tselegacytileworks.com**. The visitor stays on the page and receives confirmation only when the server accepts the email for sending. No email application opens. Cameron can reply directly to the visitor through the message's Reply-To header. Requests include all eight visible form fields; up to five JPG, PNG, WebP or PDF files can be attached (5 MiB per file, 10 MiB combined). Larger files can be shared as links in Project Details.
 
 ### Deploy on Hostinger
 
 1. Use a PHP-enabled Hostinger web/cloud hosting site (PHP 8.x). This is a custom HTML/PHP site, not a Hostinger Website Builder form. There is no assumed universal Hostinger form URL or automatic HTML form forwarding.
-2. Run `python scripts/build-site.py`. Upload the **contents** of `_site` into the site's `public_html` directory, including `send-estimate.php` at the root beside the homepage. The generated `/contact/` page submits to `../send-estimate.php`; root source `contact.html` works with the adjacent handler too.
+2. Run `python scripts/build-site.py`. Upload the **contents** of `_site` into the site's `public_html` directory, including `send-estimate.php` and the hidden `.user.ini` at the root beside the homepage. The generated `/contact/` page submits to `../send-estimate.php`; root source `contact.html` works with the adjacent handler too.
 3. Confirm the Cameron mailbox can receive email and the site's domain/email DNS is configured in Hostinger. The handler uses that same address as its From address; the visitor is only the Reply-To address. No password or secret is stored in the public files.
 4. Submit a real estimate on the HTTPS Hostinger site and confirm it arrives in Cameron's inbox (also check spam). Reply to verify the visitor's address. A mail transport acceptance is not proof of inbox delivery.
 5. If sending fails or delivery is unreliable, inspect Hostinger's mail logs and configure authenticated SMTP with server-only credentials. [Hostinger documents PHP mail limits and recommends SMTP for better delivery](https://www.hostinger.com/support/11393648-php-mail-limitation-explained-how-to-improve-email-delivery-with-smtp/). This version uses PHP mail, not authenticated SMTP.
@@ -55,7 +55,7 @@ The handler validates required fields, email addresses, option values, and paylo
 
 ### Verification
 
-`node tests/contact-form.cjs` exercises validation, POST submission, duplicate prevention, success, and error recovery using a mocked transport; it sends no email. `python tests/verify-static.py` checks the generated handler and rebased action along with existing site safeguards. Both passed locally. PHP is not installed in this workspace, so server execution and live email delivery still require verification on Hostinger. The previous form pixel-baseline test is opt-in with `CHECK_LEGACY_FORM_BASELINE=1` because the form intentionally changed.
+`node tests/contact-form.cjs` exercises validation, POST submission, duplicate prevention, success, and error recovery using a mocked transport; it sends no email. `python tests/verify-static.py` checks the generated handler and rebased action along with existing site safeguards. Both passed locally. Live Hostinger email delivery still requires verification after deployment. The previous form pixel-baseline test is opt-in with `CHECK_LEGACY_FORM_BASELINE=1` because the form intentionally changed.
 
 
 ## Portfolio revision
@@ -173,3 +173,10 @@ All navigation, canonical URLs, Open Graph URLs, structured-data URLs/IDs, and s
 GitHub Pages does not provide per-page server redirect configuration here, so old `.html` URLs use client-side replacement preserving query parameters and fragments, with an immediate meta-refresh and clickable-link fallback for JavaScript-disabled visitors. Canonicals point to clean destinations. Explicit `index.html` visits are normalized through browser history. Original page content, styling, and the form handler remain unchanged; the generated Contact form markup is checked against source and the preserved baseline.
 
 Run `node tests/clean-urls.cjs` after building/serving to verify legacy redirects, explicit index visits, clean links, skip-link destinations, filter/anchor preservation, and no-JavaScript fallback. Set `AUDIT_URL` to the served root or project-prefix URL and `PLAYWRIGHT_MODULE` when using a preinstalled Playwright package. Run the existing browser/static audit against the generated site too.
+
+
+## Contact attachments
+
+The form submits multipart data with or without JavaScript. Server checks enforce count, per-file/combined size, upload errors, file MIME/extension matching, and image headers. Original filenames are replaced with safe numbered names in the email. Files remain in PHP temporary upload storage and are never published in an uploads folder; PHP removes temporary uploads after the request. This is format validation, not malware scanning.
+
+Deploy the generated `.user.ini` too, and verify PHP fileinfo is enabled, `upload_max_filesize` is at least 5M, `post_max_size` at least 12M, and `max_file_uploads` at least 6 (20 is the usual default, allowing the application to reject excessive selections rather than PHP truncating them). Hostinger may override or cache these settings. Mail gateways must accept the encoded message (10 MiB attachments become roughly 14 MiB). The existing PHP mail transport and recipient are unchanged. Verify an actual photo/PDF arrives intact in Cameron's mailbox after upload; SMTP remains the fallback if mail delivery is unreliable.

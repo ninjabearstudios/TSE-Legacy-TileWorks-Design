@@ -9,7 +9,7 @@ OUT=ROOT/'_site'
 OUT.mkdir(exist_ok=True)
 for folder in ('assets','css','js'):
     shutil.copytree(ROOT/folder,OUT/folder,dirs_exist_ok=True)
-for name in ('favicon-small.ico','favicon-32.png','apple-touch-icon.png','robots.txt','sitemap.xml','send-estimate.php'):
+for name in ('favicon-small.ico','favicon-32.png','apple-touch-icon.png','robots.txt','sitemap.xml','send-estimate.php','.user.ini'):
     shutil.copy2(ROOT/name,OUT/name)
 for source,route in ROUTES.items():
     content=(ROOT/source).read_text(encoding='utf-8')
