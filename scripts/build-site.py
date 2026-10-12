@@ -9,7 +9,7 @@ OUT=ROOT/'_site'
 OUT.mkdir(exist_ok=True)
 for folder in ('assets','css','js'):
     shutil.copytree(ROOT/folder,OUT/folder,dirs_exist_ok=True)
-for name in ('favicon-small.ico','favicon-32.png','apple-touch-icon.png','robots.txt','sitemap.xml'):
+for name in ('favicon-small.ico','favicon-32.png','apple-touch-icon.png','robots.txt','sitemap.xml','send-estimate.php'):
     shutil.copy2(ROOT/name,OUT/name)
 for source,route in ROUTES.items():
     content=(ROOT/source).read_text(encoding='utf-8')
@@ -22,7 +22,7 @@ for source,route in ROUTES.items():
             elif value and not value.startswith(('#','/','https:','http:','mailto:','tel:','data:')):
                 value='../'+value
             return name+'="'+value+'"'
-        content=re.sub(r'\b(href|src|srcset|data-full)="([^"]*)"',attribute,content)
+        content=re.sub(r'\b(href|src|srcset|data-full|action)="([^"]*)"',attribute,content)
     target=OUT/route/'index.html'
     target.parent.mkdir(exist_ok=True)
     target.write_text(content,encoding='utf-8',newline='\n')

@@ -65,8 +65,10 @@ if (initialFilter) {
 }
 const form = document.querySelector("#estimate-form");
 if (form) {
-  form.addEventListener("submit", e => {
+  let submitting = false;
+  form.addEventListener("submit", async e => {
     e.preventDefault();
+    if (submitting || !form.reportValidity()) return;
     const data = new FormData(form);
     const status = document.querySelector("#form-status");
     const required = ["name","phone","email","projectType","details"];
@@ -74,21 +76,33 @@ if (form) {
       status.textContent = "Please complete all required fields.";
       return;
     }
-    const subject = encodeURIComponent("Legacy TileWorks estimate request - " + data.get("projectType"));
-    const body = encodeURIComponent(
-`Name: ${data.get("name")}
-Phone: ${data.get("phone")}
-Email: ${data.get("email")}
-Location: ${data.get("location")}
-Project type: ${data.get("projectType")}
-Timeline: ${data.get("timeline")}
-Budget: ${data.get("budget")}
-
-Project details:
-${data.get("details")}`
-    );
-    status.textContent = "Opening your email application. Replace estimates@example.com before launch.";
-    window.location.href = `mailto:estimates@example.com?subject=${subject}&body=${body}`;
+    const button = form.querySelector('button[type="submit"]');
+    submitting = true;
+    button.disabled = true;
+    form.setAttribute("aria-busy", "true");
+    status.textContent = "Sending your request…";
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) {
+        throw new Error(result.message || "Your request could not be sent. Please try again or call (970) 556-2889.");
+      }
+      status.textContent = result.message;
+      form.reset();
+    } catch (error) {
+      status.textContent = error instanceof SyntaxError || error instanceof TypeError
+        ? "We couldn’t confirm your request was sent. Please try again or call (970) 556-2889."
+        : error.message;
+    } finally {
+      submitting = false;
+      button.disabled = false;
+      form.removeAttribute("aria-busy");
+      status.focus({ preventScroll: true });
+    }
   });
 }
 const year = document.querySelector("#year");

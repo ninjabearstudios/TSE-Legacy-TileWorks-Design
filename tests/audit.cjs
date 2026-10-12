@@ -38,7 +38,8 @@ const widths=[320,360,375,390,430,768,1024,1280,1440,1920];
  await page.locator('.nav-cta').focus();await page.keyboard.press('Enter');await page.waitForTimeout(500);
  check(await page.locator('.menu-toggle').getAttribute('aria-expanded')==='false','mobile anchor closes menu');check(page.url().endsWith('#estimate'),'anchor preserved');check(await page.locator('#estimate').evaluate(e=>document.activeElement===e),'anchor focus');check(await page.locator('#estimate').evaluate(e=>e.getBoundingClientRect().top>=document.querySelector('.site-header').getBoundingClientRect().bottom-1),'anchor visible below header');
  await page.locator('.menu-toggle').click();await page.locator('.nav a').first().focus();await page.keyboard.press('Escape');check(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),'menu escape restores focus');
- if(fs.existsSync('.audit/form-computed-before.json')){
+ // The historical mailto form baseline applies only to the earlier audit.
+ if(process.env.CHECK_LEGACY_FORM_BASELINE==='1' && fs.existsSync('.audit/form-computed-before.json')){
   await page.mouse.move(0,0);
   await page.evaluate(()=>document.fonts.ready);
   // Let hover transitions settle before comparing the untouched form styles.

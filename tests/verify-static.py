@@ -6,10 +6,12 @@ BASE='https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/'
 def original(path):
     return subprocess.check_output(['git','show','d50eee5:'+path]).decode('utf-8').replace('\r\n','\n')
 contact=Path('contact.html').read_text(encoding='utf-8')
-assert re.search(r'<form[\s\S]*?</form>',contact)[0]==re.search(r'<form[\s\S]*?</form>',original('contact.html'))[0]
-js=Path('js/main.js').read_text(encoding='utf-8'); old=original('js/main.js')
-def form_handler(s): return s[s.index('const form ='):s.index('const year =')]
-assert form_handler(js)==form_handler(old)
+assert 'action="send-estimate.php" method="post"' in contact
+assert 'novalidate' not in contact
+js=Path('js/main.js').read_text(encoding='utf-8')
+assert 'mailto:' not in js
+assert "Cameron@tselegacytileworks.com" in Path('send-estimate.php').read_text()
+assert Path('_site/send-estimate.php').read_bytes()==Path('send-estimate.php').read_bytes()
 assert Path('css/styles.css').read_text(encoding='utf-8').startswith(original('css/styles.css'))
 class Page(HTMLParser):
     def __init__(self): super().__init__(); self.ids=[]; self.alts=[]
@@ -32,5 +34,5 @@ assert 'Disallow:' not in Path('robots.txt').read_text()
 # Source photography and artwork remain available, unchanged.
 changed=subprocess.check_output(['git','diff','--name-only','--diff-filter=DMRT','d50eee5','--','assets','favicon.ico','favicon-512.png']).decode()
 assert not changed.strip(),changed
-assert re.search(r'<form[\s\S]*?</form>',Path('_site/contact/index.html').read_text(encoding='utf-8'))[0]==re.search(r'<form[\s\S]*?</form>',contact)[0]
-print('PASS: original form markup/handler/styles, source assets, sitemap, JSON-LD syntax, IDs, and alt attributes.')
+assert re.search(r'<form[\s\S]*?</form>',Path('_site/contact/index.html').read_text(encoding='utf-8'))[0]==re.search(r'<form[\s\S]*?</form>',contact)[0].replace('action="send-estimate.php"','action="../send-estimate.php"')
+print('PASS: POST form/build endpoint, preserved base styles and source assets, sitemap, JSON-LD syntax, IDs, and alt attributes.')
