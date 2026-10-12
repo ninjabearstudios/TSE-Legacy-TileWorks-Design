@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/sitemap.xml

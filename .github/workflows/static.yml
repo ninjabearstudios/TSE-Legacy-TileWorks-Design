@@ -33,11 +33,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Assemble public website
+        run: |
+          mkdir _site
+          cp *.html favicon-small.ico favicon-32.png apple-touch-icon.png robots.txt sitemap.xml _site/
+          cp -R assets css js _site/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # Keep audit notes, scripts, and tests out of the public site.
+          path: '_site'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

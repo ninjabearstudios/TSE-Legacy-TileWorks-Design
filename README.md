@@ -59,3 +59,83 @@ Updated with confirmed operating details:
 - Clients purchase their own tile because Legacy TileWorks does not stock materials.
 - Estimates begin with an on-site measurement and specification review, followed by a written digital estimate within two business days.
 - Specific service pages now explain the actual client process instead of using technical placeholder categories.
+
+## October 12, 2026 audit remediation
+
+The site remains plain HTML, CSS, and JavaScript. No framework, theme, contact service, analytics, or business promises were introduced. The estimate form is intentionally unchanged.
+
+### A. Completed fixes and affected files
+
+- `css/styles.css`, `index.html`: constrained hero grid tracks, responsive heading sizing, safe wrapping at enlarged text sizes, shorter vertical spacing, and an image positioned inside its existing angled container. Both actions fit at 1280 × 720. Homepage services and principles reflow with enlarged text.
+- `js/main.js`, all page headers: mobile links close the menu and reset `aria-expanded`; Escape returns focus to the toggle. Same-page estimate links retain normal anchor navigation, move focus to the destination section, and clear the sticky header. Navigation collapses before desktop links become crowded.
+- `projects.html`, `js/main.js`: labelled modal, focus on close, Tab/Shift+Tab containment, inert background, Escape/backdrop/close-button dismissal, scroll restoration, and focus restoration to the initiating photograph. All 58 photographs and existing filters remain. There were no existing next/previous controls to replace.
+- `projects.html`: synchronized `aria-pressed` filter states, a single descriptive accessible name per gallery trigger, Reviews links restored, and stray head text removed. Existing local gallery comments were retained; the original local edits are recoverable in commit `d50eee5`.
+- `index.html`, `services.html`, all page footers: corrected heading levels with presentation classes; descriptive service links; homepage highlights link to matching gallery categories.
+- `about.html`: centered the single-column biography and corrected “Warrenty” to “Warranty,” without changing warranty terms.
+- Service metadata: corrected awkward descriptions; corrected the Services backsplash summary and homepage hero alternative text.
+
+### B. Visual and responsive improvements
+
+Black, gold, cream, existing fonts, photography, decorative borders, and the angled hero remain. The header logo uses a lossless derivative cropped only to remove transparent padding. Originals remain intact. Gold-section CTAs now have dark solid backgrounds and cream text; identical low-contrast CTA styling elsewhere was corrected with the same scoped selector. Form buttons are excluded.
+
+### C. Accessibility verification
+
+Keyboard checks cover mobile navigation, same-page anchors, filters, the lightbox, and FAQs. Visible focus rules exclude every form button and field. Modal behavior follows the [WAI-ARIA dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/). CTA text contrast is 16.21:1 default/focus, 13.23:1 hover, and 16.98:1 active. Reduced-motion scrolling and transitions were checked.
+
+The form HTML and submit-handler block match the preserved baseline. All pre-existing CSS remains unchanged, with targeted overrides appended. Browser comparisons of every computed property and element size inside the form match at 320, 768, and 1280 pixels. No form submission or validation interaction was performed.
+
+### D. SEO, image optimization, and deployment
+
+All 11 pages have unique titles/descriptions, absolute canonicals, Open Graph metadata, social images, and JSON-LD. The home canonical uses the trailing-slash URL for both `/` and `/index.html`. The provided live GitHub Pages URL returned HTTP 200; no final business domain was inferred.
+
+Schema uses the visible business name and existing content: LocalBusiness on Home, WebPage and BreadcrumbList on inner pages, and Service on service-detail pages. No addresses, hours, ratings, licenses, warranty terms, phone claims, or service areas were invented in schema. This is syntax-checked markup, not a claim of Google rich-result eligibility.
+
+`sitemap.xml` lists the 11 canonical pages. `robots.txt` permits crawling and references it. **GitHub project Pages serves this file under a subdirectory; crawlers only apply robots.txt at the hostname root.** It is prepared for a future root-domain deployment, not an active crawl directive for this project path. See [Google's robots.txt location rules](https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec).
+
+`scripts/optimize-images.py` generates responsive WebP versions of 60 source photographs with Pillow. Gallery full views use a quality-90 WebP only when smaller than the retained original. HTML keeps original JPEG fallback sources, intrinsic dimensions, `srcset`, and `sizes`. Below-fold photographs are lazy-loaded; the hero is eager with high fetch priority. Original image files and brand artwork are unchanged.
+
+Measured selected-image file payloads in fresh Edge contexts, device pixel ratio 1, after scrolling the whole homepage:
+
+| Viewport | Before | After | Reduction |
+| --- | ---: | ---: | ---: |
+| 375px | 2,603,993 bytes | 576,639 bytes | 77.9% |
+| 1280px | 2,603,993 bytes | 1,238,047 bytes | 52.5% |
+
+The 32px favicon is 1,395 bytes, compared with the retained 856,500-byte PNG. The replacement ICO is 4,784 bytes versus the retained 116,757-byte ICO; the Apple icon is 17,118 bytes. Payload measurements exclude HTML/CSS/JS/fonts and favicon requests. Browser-selected image sizes vary by screen density. Local unthrottled paint/layout observations are diagnostic only, not production Core Web Vitals or Lighthouse scores.
+
+The Pages workflow stages only public HTML, styles, scripts, images, icons, robots, and sitemap. Audit documentation and tests stay outside the deployed artifact. Its automatic push trigger remains `main`; the remediation branch is not automatically deployed.
+
+### E. Owner decisions and deferred launch items
+
+- **Form delivery, validation, recipient, form service, attachments, spam protection, and form accessibility:** fully deferred. Existing `mailto:estimates@example.com`, status text, `novalidate`, required-field checks, fields, layout, styles, and handlers remain untouched. Hosting capabilities must be established first. Contact copy asks for photographs although the form cannot attach them; this remains deferred with the form experience.
+- **Warranty:** Home hero says “Every installation is backed by a lifetime labor warranty because quality should last the test of time.” Home principles say “Five principles. One promise: craftsmanship built to last and backed by a lifetime labor warranty.” About's Legacy Standard says “Qualifying installations are backed by a limited lifetime labor warranty,” and its warranty card says “Our workmanship is backed by a limited lifetime labor warranty on qualifying installations.” The About heading is “Limited Lifetime Labor Warranty.” Confirm the approved scope and wording for all five references. Only the spelling and heading semantics were changed.
+- **Service areas:** every utility bar says “Serving Northern Colorado”; footers say “Northern Colorado”; Home metadata and hero also reference Northern Colorado. Home biography says “Northern Colorado, the Denver Metro, and Cheyenne areas”; Contact says “Northern Colorado and surrounding communities.” Confirm coverage and travel limits before harmonizing copy or adding geographic schema/title claims. No areas were added or removed.
+- **Reviews:** placeholder names, five-star graphics, and drafting text remain on Home/Reviews. Supply genuine, authorized reviews before launch; no fabricated review schema was added.
+- **Other business details:** reconfirm the published phone, trading name, 12+ years of experience, two-business-day estimate timing, and scope of trade coordination. About mentions bringing in licensed trades, while Home FAQ says non-tile trades are handled separately. Supply an address/hours only if they should be public and are verified. No new credentials or facts were assumed.
+- **Portfolio:** 58 photographs are not treated as 58 separate projects. Existing captions/material descriptions remain owner-review items. Supply actual project scope, materials, location permissions, and outcomes before adding case studies.
+- **Prototype notices:** retained throughout until form delivery, reviews, and business claims are resolved. Do not remove them merely because this remediation is merged.
+- **Domain and Search Console:** confirm the purchased hosting and final domain. Update all canonical, Open Graph, JSON-LD IDs/URLs/images, sitemap URLs, and robots sitemap references together; configure HTTPS and redirects for the old site and `/index.html`. Then verify a Search Console property using the owner's DNS or supplied verification token and submit the sitemap. No verification or submission has occurred. No placeholder token or guessed domain was added.
+
+### F. Tests and reproduction
+
+`tests/audit.cjs` passed 110 page/viewport combinations across all 11 pages at 320, 360, 375, 390, 430, 768, 1024, 1280, 1440, and 1920 pixels. It checked 677 local references including responsive sources/anchors, all 58 gallery thumbnails and full images, filter states, modal focus behavior, dismissals, menu/FAQ keyboard behavior, heading order, unique metadata, canonical values, and reduced motion. No local HTTP errors or JavaScript exceptions were observed. Home additionally passed 200% root text sizing at 320 and 1280 pixels and the 1280 × 720 action-visibility check.
+
+Use Python's HTTP server from the repository root, then run:
+
+```text
+node tests/audit.cjs
+python tests/verify-static.py
+```
+
+The browser test requires Playwright and installed Microsoft Edge. `PLAYWRIGHT_MODULE` can point to an existing Playwright installation; `BROWSER_CHANNEL` and `AUDIT_URL` can override defaults. Image regeneration requires Pillow: `python scripts/optimize-images.py`. The `.audit/` folder stores local screenshots, baseline comparisons, and diagnostic results and is ignored by Git. Form computed-style comparison runs when the saved local baseline is present; the static baseline check is repeatable from Git history.
+
+Visual inspection covered desktop/mobile Home, About, the shower CTA, the lightbox, and representative optimized photography. Safari, Firefox, physical devices, assistive-technology screen readers, Google rich-result validation, live-host performance, and Lighthouse were not tested. No full WCAG conformance or SEO-score claim is made.
+
+### G. Git and release workflow
+
+Repository: `https://github.com/ninjabearstudios/TSE-Legacy-TileWorks-Design`.
+Branch: `fix/tse-website-audit-2026`.
+
+The provided folder lacked `.git`. Remote history was fetched and attached using a mixed reset that preserved the files. It matched `origin/main` at `77be552` apart from local gallery edits, which were committed separately as `d50eee5`. Remediation is prepared for a pull request; merging and production deployment require separate approval. No force push or direct main-branch change is part of this work.
+
+Review delivery: [draft pull request #1](https://github.com/ninjabearstudios/TSE-Legacy-TileWorks-Design/pull/1). The branch was pushed successfully after retrying a transient TLS transport failure. Commits `29972cc` (site remediation) and `c607faf` (audit documentation/testing/public deployment staging) follow the preserved local-edit commit. Final test stabilization waits for fonts/hover transitions and distinguishes new derivatives from modified source assets. The complete final browser run and static safeguards passed; production was not deployed or merged.
