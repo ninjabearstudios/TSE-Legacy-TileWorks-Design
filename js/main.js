@@ -67,6 +67,51 @@ const form = document.querySelector("#estimate-form");
 if (form) {
   let submitting = false;
   const attachments = form.querySelector('#attachments');
+  const picker = form.querySelector('#choose-attachments');
+  const fileList = form.querySelector('#attachment-list');
+  const fileError = form.querySelector('#attachment-error');
+  const controls = form.querySelector('#attachment-controls');
+  const renderAttachments = () => {
+    if (!fileList) return;
+    fileList.replaceChildren();
+    const files = Array.from(attachments.files || []);
+    if (!files.length) {
+      const empty = document.createElement('li');
+      empty.textContent = 'No files selected';
+      fileList.append(empty);
+    }
+    files.forEach((file, index) => {
+      const row = document.createElement('li');
+      const name = document.createElement('span');
+      name.textContent = file.name;
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = 'Remove';
+      remove.setAttribute('aria-label', 'Remove ' + file.name);
+      remove.disabled = submitting;
+      remove.addEventListener('click', () => {
+        if (submitting) return;
+        const remaining = new DataTransfer();
+        Array.from(attachments.files).forEach((item, position) => {
+          if (position !== index) remaining.items.add(item);
+        });
+        attachments.files = remaining.files;
+        validateAttachments();
+        renderAttachments();
+        picker.focus();
+      });
+      row.append(name, remove);
+      fileList.append(row);
+    });
+  };
+  if (picker && attachments && controls) {
+    attachments.hidden = true;
+    controls.hidden = false;
+    picker.addEventListener('click', () => {
+      if (!submitting) attachments.click();
+    });
+    renderAttachments();
+  }
   const validateAttachments = () => {
     if (!attachments) return true;
     const files = Array.from(attachments.files || []);
@@ -78,18 +123,23 @@ if (form) {
       message = 'Each attachment must contain data and be no larger than 5 MB.';
     else if (files.reduce((total, file) => total + file.size, 0) > 10 * 1024 * 1024)
       message = 'Please keep the combined attachment size at 10 MB or less.';
-    attachments.setCustomValidity(message);
+    attachments.setCustomValidity(attachments.hidden ? "" : message);
+    if (fileError) fileError.textContent = message;
     return !message;
   };
   attachments?.addEventListener('change', () => {
     validateAttachments();
-    attachments.reportValidity();
+    renderAttachments();
+    if (!attachments.hidden) attachments.reportValidity();
   });
 
   form.addEventListener("submit", async e => {
     e.preventDefault();
     if (submitting) return;
-    validateAttachments();
+    if (!validateAttachments()) {
+      picker?.focus();
+      return;
+    }
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     const status = document.querySelector("#form-status");
@@ -101,6 +151,8 @@ if (form) {
     const button = form.querySelector('button[type="submit"]');
     submitting = true;
     button.disabled = true;
+    if (picker) picker.disabled = true;
+    renderAttachments();
     form.setAttribute("aria-busy", "true");
     status.textContent = "Sending your request…";
     const controller = new AbortController();
@@ -118,6 +170,8 @@ if (form) {
       }
       status.textContent = result.message;
       form.reset();
+      validateAttachments();
+      renderAttachments();
     } catch (error) {
       status.textContent = controller.signal.aborted
         ? "We couldn’t confirm your request within 15 seconds. It may still have reached Cameron. Your details are saved here; please call (970) 556-2889 before sending again."
@@ -128,6 +182,8 @@ if (form) {
       clearTimeout(timeout);
       submitting = false;
       button.disabled = false;
+      if (picker) picker.disabled = false;
+      renderAttachments();
       form.removeAttribute("aria-busy");
       status.focus({ preventScroll: true });
     }

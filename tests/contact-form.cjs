@@ -5,11 +5,16 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync('js/main.js', 'utf8');
 const handler = source.slice(source.indexOf('const form ='), source.indexOf('const year ='));
-function setup(fetch) {
+function setup(fetch, enhanced = false) {
   const state = { requests: 0, resets: 0, focus: 0, data: {
     name: 'Test Visitor', phone: '9705550100', email: 'visitor@example.com',
     projectType: 'Custom shower', details: 'Test project', website: ''
   }};
+  const node = () => ({ children: [], hidden: false, textContent: '',
+    append(...items) { this.children.push(...items); }, replaceChildren() { this.children = []; },
+    setAttribute() {}, addEventListener(event, callback) { this[event] = callback; }, focus() {} });
+  const controls = enhanced ? Object.fromEntries(['#choose-attachments', '#attachment-list', '#attachment-error', '#attachment-controls'].map(id => [id, node()])) : {};
+  state.controls = controls;
   const button = { disabled: false };
   const attachments = { files: [], message: '', setCustomValidity(message) { this.message = message; },
     addEventListener(_, callback) { state.change = callback; }, reportValidity() { return !this.message; } };
@@ -19,12 +24,13 @@ function setup(fetch) {
     action: 'https://example.test/send-estimate.php',
     reportValidity: () => state.valid !== false && !attachments.message,
     addEventListener: (_, callback) => { state.submit = () => callback({ preventDefault() {} }); },
-    querySelector: selector => selector === '#attachments' ? attachments : button, setAttribute() {}, removeAttribute() {},
-    reset() { state.resets++; }
+    querySelector: selector => selector === '#attachments' ? attachments : selector === 'button[type="submit"]' ? button : controls[selector] || null, setAttribute() {}, removeAttribute() {},
+    reset() { state.resets++; attachments.files = []; }
   };
   vm.runInNewContext(handler, {
-    document: { querySelector: selector => selector === '#estimate-form' ? form : status },
-    FormData: class { get(key) { return state.data[key]; } },
+    document: { createElement: node, querySelector: selector => selector === '#estimate-form' ? form : status },
+    DataTransfer: class { constructor() { this.files = []; this.items = { add: file => this.files.push(file) }; } },
+    FormData: class { constructor() { this.files = Array.from(attachments.files); } get(key) { return state.data[key]; } },
     fetch: async (...args) => { state.requests++; state.args = args; return fetch(...args); },
     AbortController,
     setTimeout(callback, delay) { state.timeout = callback; state.delay = delay; return 1; },
@@ -106,6 +112,24 @@ function setup(fetch) {
     assert.match(stalled.status.textContent, /may still have reached Cameron/);
     assert.match(stalled.status.textContent, /15 seconds/);
   }
+  const editing = setup(async () => ({ ok: true, json: async () => ({ ok: true, message: 'Sent' }) }), true);
+  assert.equal(editing.state.attachments.hidden, true);
+  editing.state.attachments.files = [{ name: 'first.png', size: 10 }, { name: 'second.pdf', size: 10 }];
+  editing.state.change();
+  editing.state.controls['#attachment-list'].children[0].children[1].click();
+  assert.deepEqual(editing.state.attachments.files.map(file => file.name), ['second.pdf']);
+  await editing.state.submit();
+  assert.deepEqual(editing.state.args[1].body.files.map(file => file.name), ['second.pdf'], 'removed file excluded from submission');
+  assert.equal(editing.state.attachments.files.length, 0);
+  assert.equal(editing.state.controls['#attachment-list'].children[0].textContent, 'No files selected');
+  editing.state.attachments.files = [{ name: 'bad.exe', size: 10 }];
+  editing.state.change();
+  await editing.state.submit();
+  assert.equal(editing.state.requests, 1, 'invalid hidden input still blocks submission');
+  assert.match(editing.state.controls['#attachment-error'].textContent, /JPG/);
+  editing.state.controls['#attachment-list'].children[0].children[1].click();
+  assert.equal(editing.state.attachments.files.length, 0);
+  assert.equal(editing.state.controls['#attachment-error'].textContent, '');
   assert(!handler.includes('mailto:'));
   console.log('PASS: validation, POST, pending state, duplicate prevention, success reset, 15-second upload/response timeouts, and error recovery. No email sent.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

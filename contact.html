@@ -87,6 +87,11 @@
       <label class="full">Project Details *<textarea name="details" rows="8" maxlength="10000" required placeholder="Describe the room, size, current condition, materials, design goals, and schedule. You can include links to photographs or inspiration images."></textarea></label>
       <div class="full attachment-field"><span id="attachments-title">Photos or documents (optional)</span>
         <input id="attachments" name="attachments[]" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.pdf" aria-labelledby="attachments-title" aria-describedby="attachments-help">
+        <div id="attachment-controls" hidden>
+          <button id="choose-attachments" type="button" aria-describedby="attachments-help">Choose Files</button>
+          <ul id="attachment-list" aria-label="Selected attachments"></ul>
+          <p id="attachment-error" role="status" aria-live="polite"></p>
+        </div>
         <span id="attachments-help" class="attachment-help">JPG, PNG, WebP or PDF. Up to 5 files, 5 MB per file and 10 MB total. Files are emailed with your request. For other formats or larger files, include a sharing link in Project Details.</span>
       </div>
       <div class="full"><button class="btn btn-gold" type="submit">Send Estimate Request</button><p class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p></div>
