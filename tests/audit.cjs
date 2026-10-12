@@ -38,6 +38,10 @@ const widths=[320,360,375,390,430,768,1024,1280,1440,1920];
  check(await page.locator('.menu-toggle').getAttribute('aria-expanded')==='false','mobile anchor closes menu');check(page.url().endsWith('#estimate'),'anchor preserved');check(await page.locator('#estimate').evaluate(e=>document.activeElement===e),'anchor focus');check(await page.locator('#estimate').evaluate(e=>e.getBoundingClientRect().top>=document.querySelector('.site-header').getBoundingClientRect().bottom-1),'anchor visible below header');
  await page.locator('.menu-toggle').click();await page.locator('.nav a').first().focus();await page.keyboard.press('Escape');check(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),'menu escape restores focus');
  if(fs.existsSync('.audit/form-computed-before.json')){
+  await page.mouse.move(0,0);
+  await page.evaluate(()=>document.fonts.ready);
+  // Let hover transitions settle before comparing the untouched form styles.
+  await page.waitForTimeout(250);
   const baseline=JSON.parse(fs.readFileSync('.audit/form-computed-before.json'));let differences=[];
   for(const w of [320,768,1280]){await page.setViewportSize({width:w,height:900});const current=await page.locator('#estimate-form').evaluate(el=>[el,...el.querySelectorAll('*')].map(e=>({tag:e.tagName,style:Array.from(getComputedStyle(e)).map(k=>[k,getComputedStyle(e).getPropertyValue(k)]),width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height})));if(JSON.stringify(current)!==JSON.stringify(baseline[w]))differences.push(w);}
   check(!differences.length,'form computed styles changed '+differences);fs.writeFileSync('.audit/form-computed-result.json',JSON.stringify({unchanged:!differences.length,differences}));

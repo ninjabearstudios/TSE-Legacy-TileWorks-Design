@@ -137,3 +137,5 @@ Repository: `https://github.com/ninjabearstudios/TSE-Legacy-TileWorks-Design`.
 Branch: `fix/tse-website-audit-2026`.
 
 The provided folder lacked `.git`. Remote history was fetched and attached using a mixed reset that preserved the files. It matched `origin/main` at `77be552` apart from local gallery edits, which were committed separately as `d50eee5`. Remediation is prepared for a pull request; merging and production deployment require separate approval. No force push or direct main-branch change is part of this work.
+
+Review delivery: [draft pull request #1](https://github.com/ninjabearstudios/TSE-Legacy-TileWorks-Design/pull/1). The branch was pushed successfully after retrying a transient TLS transport failure. Commits `29972cc` (site remediation) and `c607faf` (audit documentation/testing/public deployment staging) follow the preserved local-edit commit. Final test stabilization waits for fonts/hover transitions and distinguishes new derivatives from modified source assets. The complete final browser run and static safeguards passed; production was not deployed or merged.

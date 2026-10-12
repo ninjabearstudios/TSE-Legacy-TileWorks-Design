@@ -29,6 +29,6 @@ expected={BASE+('' if p.name=='index.html' else p.name) for p in Path('.').glob(
 assert len(urls)==11 and set(urls)==expected
 assert 'Disallow:' not in Path('robots.txt').read_text()
 # Source photography and artwork remain available, unchanged.
-changed=subprocess.check_output(['git','diff','--name-only','d50eee5','--','assets','favicon.ico','favicon-512.png']).decode()
+changed=subprocess.check_output(['git','diff','--name-only','--diff-filter=DMRT','d50eee5','--','assets','favicon.ico','favicon-512.png']).decode()
 assert not changed.strip(),changed
 print('PASS: original form markup/handler/styles, source assets, sitemap, JSON-LD syntax, IDs, and alt attributes.')

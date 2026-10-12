@@ -1,0 +1,53 @@
+{
+  "measurements": [
+    {
+      "variant": "before",
+      "width": 375,
+      "initialImageBytes": 2603993,
+      "allImageBytes": 2603993,
+      "localUnthrottledVitals": {
+        "cls": 0.006389271913580246,
+        "lcp": 360
+      },
+      "hero": "assets/images/hero-bathroom.jpg"
+    },
+    {
+      "variant": "after",
+      "width": 375,
+      "initialImageBytes": 328797,
+      "allImageBytes": 576639,
+      "localUnthrottledVitals": {
+        "cls": 0.00024165,
+        "lcp": 240
+      },
+      "hero": "assets/images/hero-bathroom.jpg"
+    },
+    {
+      "variant": "before",
+      "width": 1280,
+      "initialImageBytes": 2603993,
+      "allImageBytes": 2603993,
+      "localUnthrottledVitals": {
+        "cls": 0.03323478082021077,
+        "lcp": 256
+      },
+      "hero": "assets/images/hero-bathroom.jpg"
+    },
+    {
+      "variant": "after",
+      "width": 1280,
+      "initialImageBytes": 964249,
+      "allImageBytes": 1238047,
+      "localUnthrottledVitals": {
+        "cls": 0.0022241735882229273,
+        "lcp": 232
+      },
+      "hero": "assets/images/hero-bathroom.jpg"
+    }
+  ],
+  "ctaContrast": {
+    "default": 16.214040591562366,
+    "hover": 13.231943502456375,
+    "active": 16.98012993750311
+  }
+}
