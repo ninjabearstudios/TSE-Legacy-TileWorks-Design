@@ -1,4 +1,8 @@
 
+// Keep explicit directory-index visits on the same canonical, clean URL.
+if (location.pathname.endsWith("/index.html")) {
+  history.replaceState(null, "", location.pathname.slice(0, -10) + location.search + location.hash);
+}
 const toggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 if (toggle && nav) {

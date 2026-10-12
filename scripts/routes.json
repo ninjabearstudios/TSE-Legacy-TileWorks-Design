@@ -1,0 +1,13 @@
+{
+  "index.html": "",
+  "about.html": "about/",
+  "contact.html": "contact/",
+  "projects.html": "projects/",
+  "reviews.html": "reviews/",
+  "services.html": "services/",
+  "service-showers.html": "custom-showers/",
+  "service-flooring.html": "tile-flooring/",
+  "service-backsplashes.html": "backsplashes/",
+  "service-stone.html": "natural-stone/",
+  "service-custom-design.html": "custom-design/"
+}

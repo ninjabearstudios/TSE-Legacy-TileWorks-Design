@@ -18,10 +18,11 @@ This site translates the approved luxury black-marble and gold concept into a fu
 - Accessible skip link and semantic structure
 
 ## Run locally
-Open `index.html`, or run:
+Build the clean-URL site, then serve the generated directory:
 
 ```bash
-python -m http.server 8000
+python scripts/build-site.py
+python -m http.server 8000 --directory _site
 ```
 
 Then visit `http://localhost:8000`.
@@ -120,7 +121,7 @@ The Pages workflow stages only public HTML, styles, scripts, images, icons, robo
 
 `tests/audit.cjs` passed 110 page/viewport combinations across all 11 pages at 320, 360, 375, 390, 430, 768, 1024, 1280, 1440, and 1920 pixels. It checked 677 local references including responsive sources/anchors, all 58 gallery thumbnails and full images, filter states, modal focus behavior, dismissals, menu/FAQ keyboard behavior, heading order, unique metadata, canonical values, and reduced motion. No local HTTP errors or JavaScript exceptions were observed. Home additionally passed 200% root text sizing at 320 and 1280 pixels and the 1280 × 720 action-visibility check.
 
-Use Python's HTTP server from the repository root, then run:
+Build using `python scripts/build-site.py` and serve `_site` with Python's HTTP server, then run:
 
 ```text
 node tests/audit.cjs
@@ -139,3 +140,14 @@ Branch: `fix/tse-website-audit-2026`.
 The provided folder lacked `.git`. Remote history was fetched and attached using a mixed reset that preserved the files. It matched `origin/main` at `77be552` apart from local gallery edits, which were committed separately as `d50eee5`. Remediation is prepared for a pull request; merging and production deployment require separate approval. No force push or direct main-branch change is part of this work.
 
 Review delivery: [draft pull request #1](https://github.com/ninjabearstudios/TSE-Legacy-TileWorks-Design/pull/1). The branch was pushed successfully after retrying a transient TLS transport failure. Commits `29972cc` (site remediation) and `c607faf` (audit documentation/testing/public deployment staging) follow the preserved local-edit commit. Final test stabilization waits for fonts/hover transitions and distinguishes new derivatives from modified source assets. The complete final browser run and static safeguards passed; production was not deployed or merged.
+
+
+## Clean URLs (October 12, 2026 follow-up)
+
+The current public routes are `/`, `/about/`, `/contact/`, `/projects/`, `/reviews/`, `/services/`, `/custom-showers/`, `/tile-flooring/`, `/backsplashes/`, `/natural-stone/`, and `/custom-design/`, under the existing GitHub Pages project prefix. This supersedes the audit report's earlier `.html` canonical references.
+
+All navigation, canonical URLs, Open Graph URLs, structured-data URLs/IDs, and sitemap entries now use these directory routes. `scripts/routes.json` maps the editable root HTML source files to public routes. `python scripts/build-site.py` creates `_site`, writes directory index files, rebases relative asset/link paths, and emits legacy `.html` forwarding pages. There is no framework or server dependency. Source files retain their existing names for editing; public links do not expose them. Deploy only `_site`, as configured in the Pages workflow.
+
+GitHub Pages does not provide per-page server redirect configuration here, so old `.html` URLs use client-side replacement preserving query parameters and fragments, with an immediate meta-refresh and clickable-link fallback for JavaScript-disabled visitors. Canonicals point to clean destinations. Explicit `index.html` visits are normalized through browser history. Original page content, styling, and the form handler remain unchanged; the generated Contact form markup is checked against source and the preserved baseline.
+
+Run `node tests/clean-urls.cjs` after building/serving to verify legacy redirects, explicit index visits, clean links, skip-link destinations, filter/anchor preservation, and no-JavaScript fallback. Set `AUDIT_URL` to the served root or project-prefix URL and `PLAYWRIGHT_MODULE` when using a preinstalled Playwright package. Run the existing browser/static audit against the generated site too.

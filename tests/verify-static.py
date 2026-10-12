@@ -25,10 +25,12 @@ for p in Path('.').glob('*.html'):
         data=json.loads(raw); assert data['@context']=='https://schema.org'
         assert not re.search(r'aggregateRating|reviewRating|openingHours|areaServed|address',raw)
 urls=[el.text for el in ET.parse('sitemap.xml').findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-expected={BASE+('' if p.name=='index.html' else p.name) for p in Path('.').glob('*.html')}
+routes=json.loads(Path('scripts/routes.json').read_text())
+expected={BASE+route for route in routes.values()}
 assert len(urls)==11 and set(urls)==expected
 assert 'Disallow:' not in Path('robots.txt').read_text()
 # Source photography and artwork remain available, unchanged.
 changed=subprocess.check_output(['git','diff','--name-only','--diff-filter=DMRT','d50eee5','--','assets','favicon.ico','favicon-512.png']).decode()
 assert not changed.strip(),changed
+assert re.search(r'<form[\s\S]*?</form>',Path('_site/contact/index.html').read_text(encoding='utf-8'))[0]==re.search(r'<form[\s\S]*?</form>',contact)[0]
 print('PASS: original form markup/handler/styles, source assets, sitemap, JSON-LD syntax, IDs, and alt attributes.')
