@@ -85,10 +85,10 @@
       <label>Timeline<select name="timeline"><option>Not sure yet</option><option>As soon as available</option><option>1–3 months</option><option>3–6 months</option><option>6+ months</option></select></label>
       <label>Budget<select name="budget"><option>Prefer to discuss</option><option>Under $5,000</option><option>$5,000–$10,000</option><option>$10,000–$20,000</option><option>$20,000–$40,000</option><option>$40,000+</option></select></label>
       <label class="full">Project Details *<textarea name="details" rows="8" maxlength="10000" required placeholder="Describe the room, size, current condition, materials, design goals, and schedule. You can include links to photographs or inspiration images."></textarea></label>
-      <label class="full" for="attachments">Photos or documents (optional)
-        <input id="attachments" name="attachments[]" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.pdf" aria-describedby="attachments-help">
+      <div class="full attachment-field"><span id="attachments-title">Photos or documents (optional)</span>
+        <input id="attachments" name="attachments[]" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.pdf" aria-labelledby="attachments-title" aria-describedby="attachments-help">
         <span id="attachments-help" class="attachment-help">JPG, PNG, WebP or PDF. Up to 5 files, 5 MB per file and 10 MB total. Files are emailed with your request. For other formats or larger files, include a sharing link in Project Details.</span>
-      </label>
+      </div>
       <div class="full"><button class="btn btn-gold" type="submit">Send Estimate Request</button><p class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p></div>
     </div>
   </form>
