@@ -2,7 +2,7 @@
 from pathlib import Path
 import subprocess, re, json, xml.etree.ElementTree as ET
 from html.parser import HTMLParser
-BASE='https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/'
+BASE='https://tselegacytileworks.com/'
 def original(path):
     return subprocess.check_output(['git','show','d50eee5:'+path]).decode('utf-8').replace('\r\n','\n')
 contact=Path('contact.html').read_text(encoding='utf-8')
@@ -31,6 +31,18 @@ routes=json.loads(Path('scripts/routes.json').read_text())
 expected={BASE+route for route in routes.values()}
 assert len(urls)==11 and set(urls)==expected
 assert 'Disallow:' not in Path('robots.txt').read_text()
+assert 'Sitemap: '+BASE+'sitemap.xml' in Path('robots.txt').read_text()
+for source, route in routes.items():
+    source_text=Path(source).read_text(encoding='utf-8')
+    built_text=(Path('_site')/route/'index.html').read_text(encoding='utf-8')
+    for text in (source_text,built_text):
+        assert '<link rel="canonical" href="'+BASE+route+'">' in text,source
+        assert '<meta property="og:url" content="'+BASE+route+'">' in text,source
+        assert 'ninjabearstudios.github.io' not in text,source
+for page in Path('_site').rglob('*.html'):
+    assert 'ninjabearstudios.github.io' not in page.read_text(encoding='utf-8'),page
+assert Path('_site/robots.txt').read_bytes()==Path('robots.txt').read_bytes()
+assert Path('_site/sitemap.xml').read_bytes()==Path('sitemap.xml').read_bytes()
 # Source photography and artwork remain available, unchanged.
 changed=subprocess.check_output(['git','diff','--name-only','--diff-filter=DMRT','d50eee5','--','assets','favicon.ico','favicon-512.png']).decode()
 assert not changed.strip(),changed

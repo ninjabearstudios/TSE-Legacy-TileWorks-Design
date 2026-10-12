@@ -2,6 +2,12 @@
 
 This site translates the approved luxury black-marble and gold concept into a functional, responsive multi-page website.
 
+## Production domain — October 12, 2026
+
+The current canonical domain is `https://tselegacytileworks.com/`. All public page canonicals, Open Graph URLs/images, structured-data IDs/URLs, sitemap entries, robots sitemap references, and generated legacy redirect canonicals use this domain. Relative navigation and asset links continue to work on the GitHub preview and at the production domain root. This supersedes older domain notes in the historical audit below.
+
+Build with `python scripts/build-site.py` and upload the **contents** of `_site` into the production domain's `public_html`, including `.user.ini` and `send-estimate.php`. Do not upload the repository or place an extra `_site` directory inside `public_html`. Actual Hostinger email delivery remains to be verified after upload.
+
 ## Included
 - Home page matching the approved concept
 - Full-width transparent logo with safe padding so no elements are clipped

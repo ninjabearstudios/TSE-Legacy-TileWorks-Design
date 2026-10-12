@@ -28,7 +28,7 @@ for source,route in ROUTES.items():
     target.write_text(content,encoding='utf-8',newline='\n')
     if route:
         destination='./'+route
-        canonical='https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/'+route
+        canonical='https://tselegacytileworks.com/'+route
         # JS preserves query/filter and anchor state. Meta refresh and link support no-JS visitors.
         redirect='''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">

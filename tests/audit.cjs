@@ -16,7 +16,7 @@ const widths=[320,360,375,390,430,768,1024,1280,1440,1920];
   titles.add(await page.title()); descriptions.add(await page.locator('meta[name="description"]').getAttribute('content'));
   check(await page.locator('h1').count()===1,file+' one h1');
   check(await page.locator('h1,h2,h3,h4,h5,h6').evaluateAll(els=>els.every((e,i)=>i===0||Number(e.tagName[1])<=Number(els[i-1].tagName[1])+1)),file+' heading hierarchy');
-  check(await page.locator('link[rel="canonical"]').getAttribute('href')==='https://ninjabearstudios.github.io/TSE-Legacy-TileWorks-Design/'+routes[file],file+' canonical');
+  check(await page.locator('link[rel="canonical"]').getAttribute('href')==='https://tselegacytileworks.com/'+routes[file],file+' canonical');
   check(await page.locator('meta[property^="og:"]').count()>=7,file+' Open Graph');
   await page.locator('script[type="application/ld+json"]').evaluateAll(els=>els.forEach(el=>JSON.parse(el.textContent)));
   const references=await page.locator('a[href],img[src],link[href],script[src],[data-full],[srcset]').evaluateAll(els=>els.flatMap(el=>[el.getAttribute('href')||el.getAttribute('src')||el.dataset.full,...(el.getAttribute('srcset')||'').split(',').map(s=>s.trim().split(' ')[0])]).filter(Boolean));
